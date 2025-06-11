@@ -15,8 +15,16 @@
     <style>
         body {
             font-family: 'Kanit', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll from emojis */
         }
         /* Custom styles for better aesthetics */
+        .btn {
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
         .btn-gradient {
             background-image: linear-gradient(to right, #a8c0ff 0%, #d9a7c7 51%, #f3a683 100%);
             transition: 0.5s;
@@ -49,6 +57,34 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* --- ADDED: Emoji Background Animation --- */
+        #emoji-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .emoji {
+            position: absolute;
+            bottom: -50px; /* Start from below the screen */
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: floatUp 15s linear infinite;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100vh); /* Move up to the top */
+                opacity: 0.1;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -58,29 +94,50 @@
 
         <!-- Cover Page -->
         <div id="page-cover">
-            <div class="min-h-screen flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
-                <h1 class="text-4xl md:text-6xl font-bold text-gray-700 mb-2">S.T.D. DENTAL LAB</h1>
-                <p class="text-xl md:text-2xl text-gray-600 mb-8">🦷คลินิกทันตกรรมที่ร่วมงานกับเรา✨</p>
-                <div class="space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row items-center">
-                    <button onclick="showPage('page-dashboard')" class="btn-gradient font-bold py-3 px-6 rounded-full shadow-lg text-lg w-full md:w-auto mb-4 md:mb-0">
-                        ดูรายชื่อคลินิกทันตกรรม 🏥
-                    </button>
-                    <button onclick="showPage('page-register')" class="btn-gradient font-bold py-3 px-6 rounded-full shadow-lg text-lg w-full md:w-auto mb-4 md:mb-0">
-                        คลินิกสนใจร่วมงานกับเรา ✍️
-                    </button>
-                    <button onclick="showPage('page-catalog')" class="btn-gradient font-bold py-3 px-6 rounded-full shadow-lg text-lg w-full md:w-auto">
-                        Catalog สินค้า 📦
-                    </button>
+            <div class="min-h-screen relative flex flex-col text-center p-6 rounded-2xl bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 overflow-hidden">
+                
+                <!-- ADDED: Emoji background container -->
+                <div id="emoji-background"></div>
+
+                <!-- Main Content Wrapper, flex-grow and z-10 to be on top of emojis -->
+                <div class="relative z-10 flex-grow flex flex-col items-center justify-center">
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-700 mb-2">S.T.D. DENTAL LAB</h1>
+                    <p class="text-xl md:text-2xl text-gray-600 mb-8">🦷คลินิกทันตกรรมที่ร่วมงานกับเรา✨</p>
+                    <div class="space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row items-center">
+                        <button onclick="showPage('page-dashboard')" class="btn btn-gradient font-bold py-3 px-6 rounded-full shadow-lg text-lg w-full md:w-auto mb-4 md:mb-0">
+                            ดูรายชื่อคลินิกทันตกรรม 🏥
+                        </button>
+                        <button onclick="showPage('page-register')" class="btn btn-gradient font-bold py-3 px-6 rounded-full shadow-lg text-lg w-full md:w-auto mb-4 md:mb-0">
+                            คลินิกสนใจร่วมงานกับเรา ✍️
+                        </button>
+                        <button onclick="showPage('page-catalog')" class="btn btn-gradient font-bold py-3 px-6 rounded-full shadow-lg text-lg w-full md:w-auto">
+                            Catalog สินค้า 📦
+                        </button>
+                    </div>
                 </div>
+
+                <!-- About Us Section (Footer), z-10 to be on top -->
+                <div class="relative z-10 w-full">
+                    <div class="max-w-3xl mx-auto bg-white bg-opacity-60 backdrop-blur-sm p-4 rounded-xl shadow-md">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">เกี่ยวกับเรา</h3>
+                        <p class="text-sm text-gray-700">
+                            ห้างหุ้นส่วนจำกัด เอส.ที.ดี.เด็นตอล แลป จ.เชียงใหม่ เป็นแลปที่รับผลิตเครื่องมือทางทันตกรรมให้กับคลินิกทันตกรรมและโรงพยาบาลทั่วประเทศ ได้เปิดรับสมัครพนักงานรุ่นใหม่ที่พร้อมจะเติบโตไปด้วยกัน
+                        </p>
+                        <p class="text-sm text-gray-600 mt-2 font-semibold">
+                            ที่ตั้งสำนักงาน: ต.สันปูเลย อ.ดอยสะเก็ด จ.เชียงใหม่ (ใกล้แยกแม่กวง)
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <!-- Dashboard Page -->
         <div id="page-dashboard" class="hidden">
-            <button onclick="showPage('page-cover')" class="mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
+            <!-- UPDATED: Button styling -->
+            <button onclick="showPage('page-cover')" class="btn mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
             <h2 class="text-3xl font-bold mb-4 text-center text-gray-700">รายชื่อคลินิกทันตกรรมในเครือ</h2>
             
-            <!-- Province Filter Section -->
             <div class="my-6 flex flex-col md:flex-row justify-center items-center gap-4">
                 <div class="flex items-center">
                     <label for="province-filter" class="mr-2 font-semibold text-gray-700">ตัวกรองจังหวัด:</label>
@@ -88,7 +145,8 @@
                         <!-- Options populated by JS -->
                     </select>
                 </div>
-                <button id="update-clinics-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-md">
+                <!-- UPDATED: Button styling -->
+                <button id="update-clinics-btn" class="btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-md">
                     🔄 อัพเดทข้อมูล
                 </button>
             </div>
@@ -114,7 +172,8 @@
 
         <!-- Registration Page -->
         <div id="page-register" class="hidden">
-            <button onclick="showPage('page-cover')" class="mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
+            <!-- UPDATED: Button styling -->
+            <button onclick="showPage('page-cover')" class="btn mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
             <div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
                 <h2 class="text-3xl font-bold mb-6 text-center text-gray-700">ลงทะเบียนคลินิกทันตกรรม</h2>
                 <form id="clinic-form">
@@ -156,7 +215,8 @@
                         </div>
                     </div>
                     <div class="mt-8 text-center">
-                        <button class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg" type="submit">
+                        <!-- UPDATED: Button styling -->
+                        <button class="btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg" type="submit">
                             ลงทะเบียน
                         </button>
                     </div>
@@ -166,10 +226,12 @@
         
         <!-- Catalog Page -->
         <div id="page-catalog" class="hidden">
-            <button onclick="showPage('page-cover')" class="mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
+            <!-- UPDATED: Button styling -->
+            <button onclick="showPage('page-cover')" class="btn mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
             <h2 class="text-3xl font-bold mb-6 text-center text-gray-700">Catalog สินค้า</h2>
              <div class="text-center mb-6">
-                <button id="update-catalog-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-md">
+                <!-- UPDATED: Button styling -->
+                <button id="update-catalog-btn" class="btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-md">
                     🔄 อัพเดทข้อมูล
                 </button>
             </div>
@@ -385,6 +447,22 @@
             });
         }
         
+        // ADDED: Function to create animated emoji background
+        function createEmojiBackground() {
+            const container = document.getElementById('emoji-background');
+            const emojiCount = 30; // Number of emojis
+            for (let i = 0; i < emojiCount; i++) {
+                const emoji = document.createElement('span');
+                emoji.className = 'emoji';
+                emoji.textContent = '🦷';
+                emoji.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+                emoji.style.animationDuration = `${Math.random() * 10 + 10}s`; // Random duration between 10-20s
+                emoji.style.animationDelay = `-${Math.random() * 15}s`; // Start at different times
+                emoji.style.fontSize = `${Math.random() * 2 + 1}rem`; // Random size
+                container.appendChild(emoji);
+            }
+        }
+
         function loadCachedData() {
             const clinicData = localStorage.getItem('clinicData');
             if(clinicData){
@@ -399,6 +477,7 @@
         window.onload = function() {
             populateProvinces();
             loadCachedData();
+            createEmojiBackground(); // Create the background on load
             updateClinicsBtn.addEventListener('click', fetchClinicData);
             updateCatalogBtn.addEventListener('click', fetchCatalogData);
             provinceFilterSelect.addEventListener('change', renderFilteredClinics); // Add event listener for the filter
