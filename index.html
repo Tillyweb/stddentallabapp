@@ -4,82 +4,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S.T.D.DENTALLAB - Partner Clinics</title>
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- SweetAlert2 for notifications -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Google Fonts: Kanit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; }
         body {
             font-family: 'Kanit', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll from emojis */
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b4e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
         }
-        /* Custom styles for better aesthetics */
-        .btn {
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 60px rgba(255, 255, 255, 0.03);
         }
-        .btn:hover {
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        
+        /* Animated Gradient Header */
+        .gradient-header {
+            background: linear-gradient(-45deg, #0f0f23, #1e3a8a, #7c3aed, #db2777, #0f0f23);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
         }
-        .btn-gradient {
-            background-image: linear-gradient(to right, #a8c0ff 0%, #d9a7c7 51%, #f3a683 100%);
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .btn-gradient:hover {
-            background-position: right center;
-        }
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        
+        /* Neon Glow Button */
+        .btn-glow {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
         }
-        /* Loading Spinner */
+        .btn-glow:hover::before { left: 100%; }
+        .btn-glow:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.6), 0 0 60px rgba(118, 75, 162, 0.4);
+        }
+        
+        .btn-glow-yellow {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .btn-glow-yellow:hover {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.6), 0 0 60px rgba(217, 119, 6, 0.4);
+        }
+        
+        /* Table Styling */
+        .table-glass {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .table-glass thead {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+        }
+        .table-glass th {
+            color: #e0e0e0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .table-glass td {
+            color: #d1d1d1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .table-glass tr:hover td {
+            background: rgba(102, 126, 234, 0.15);
+        }
+        
+        /* Slide Glow Effect */
+        .slide-glow {
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.2), inset 0 0 20px rgba(102, 126, 234, 0.05);
+        }
+        
+        /* Fade-in Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Pulse Glow */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.6); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        
+        /* Loader */
         .loader {
-            border: 8px solid #f3f3f3;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #667eea;
             border-radius: 50%;
-            border-top: 8px solid #a8c0ff;
-            width: 60px;
-            height: 60px;
-            animation: spin 2s linear infinite;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-
+        
+        /* Nav buttons */
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Slideshow arrows */
+        .slide-arrow {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .slide-arrow:hover {
+            background: rgba(102, 126, 234, 0.5);
+            transform: scale(1.1);
+        }
+        
+        /* Province badge */
+        .province-badge {
+            background: linear-gradient(135deg, #667eea33, #764ba233);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            color: #a5b4fc;
+        }
+        
+        /* Dot indicator */
+        .dot-active {
+            background: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <!-- Main container -->
-    <div class="container mx-auto p-4 max-w-7xl">
+    <div class="max-w-7xl mx-auto p-4">
 
-        <!-- Cover Page — REDESIGNED -->
+        <!-- Cover Page -->
         <div id="page-cover">
             <!-- Header -->
-            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 sticky top-0 z-50 shadow-lg">
-                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="gradient-header rounded-2xl p-4 mb-6 sticky top-4 z-50 glass-card">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="text-center md:text-left">
-                        <h1 class="text-2xl md:text-3xl font-bold">🦷 S.T.D. DENTAL LAB</h1>
-                        <p class="text-sm text-blue-100">ห้างหุ้นส่วนจำกัด เอส.ที.ดี.เด็นตอล แลป จ.เชียงใหม่</p>
+                        <h1 class="text-2xl md:text-3xl font-bold text-white">🦷 S.T.D. DENTAL LAB</h1>
+                        <p class="text-blue-200 text-sm">ห้างหุ้นส่วนจำกัด เอส.ที.ดี.เด็นตอล แลป จ.เชียงใหม่</p>
                     </div>
                     <div class="flex gap-3">
-                        <button onclick="window.open('https://lin.ee/pS4MUIo', '_blank')" class="bg-white text-blue-600 font-bold py-2 px-4 rounded-full shadow hover:bg-gray-100 transition-all text-sm">
+                        <button onclick="window.open('https://lin.ee/pS4MUIo', '_blank')" class="btn-glow text-white font-bold py-2 px-5 rounded-full text-sm">
                             📞 ติดต่อเรา
                         </button>
-                        <button onclick="showPage('page-register')" class="bg-yellow-400 text-gray-800 font-bold py-2 px-4 rounded-full shadow hover:bg-yellow-300 transition-all text-sm">
+                        <button onclick="showPage('page-register')" class="btn-glow btn-glow-yellow text-white font-bold py-2 px-5 rounded-full text-sm">
                             ✍️ ลงทะเบียนคลินิก
                         </button>
                     </div>
@@ -87,63 +196,63 @@
             </div>
 
             <!-- Main Content -->
-            <div class="max-w-7xl mx-auto p-4 space-y-6">
+            <div class="space-y-6">
                 
                 <!-- Catalog Slideshow Section -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
-                    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">📦 Catalog สินค้าของเรา</h2>
+                <div class="glass-card p-6 fade-in">
+                    <h2 class="text-2xl font-bold text-white mb-6 text-center">📦 Catalog สินค้าของเรา</h2>
                     
                     <div class="flex justify-center mb-4">
-                        <button onclick="fetchCoverCatalogData()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-6 rounded-full shadow transition-all">
+                        <button onclick="fetchCoverCatalogData()" class="btn-glow text-white font-bold py-2 px-6 rounded-full">
                             🔄 โหลดสินค้า
                         </button>
                     </div>
                     
-                    <div id="loader-cover-catalog" class="hidden flex justify-center my-4">
+                    <div id="loader-cover-catalog" class="hidden flex justify-center my-6">
                         <div class="loader"></div>
                     </div>
                     
                     <!-- Slideshow Container -->
-                    <div class="relative max-w-2xl mx-auto">
-                        <div id="catalog-slideshow" class="overflow-hidden rounded-xl">
+                    <div class="relative max-w-3xl mx-auto">
+                        <div id="catalog-slideshow" class="overflow-hidden rounded-2xl slide-glow">
                             <div id="slideshow-track" class="flex transition-transform duration-500">
                                 <!-- Slides will be inserted here by JS -->
                             </div>
                         </div>
                         <!-- Prev/Next Arrows -->
-                        <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 shadow-lg text-2xl transition-all">◀</button>
-                        <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 shadow-lg text-2xl transition-all">▶</button>
+                        <button onclick="prevSlide()" class="slide-arrow absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-xl">◀</button>
+                        <button onclick="nextSlide()" class="slide-arrow absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-xl">▶</button>
                         <!-- Dots -->
                         <div id="slideshow-dots" class="flex justify-center gap-2 mt-4"></div>
                     </div>
                 </div>
 
                 <!-- Clinic Table Section -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
-                    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">🏥 รายชื่อคลินิกทันตกรรมในเครือ</h2>
+                <div class="glass-card p-6 fade-in" style="animation-delay: 0.2s">
+                    <h2 class="text-2xl font-bold text-white mb-6 text-center">🏥 รายชื่อคลินิกทันตกรรมในเครือ</h2>
                     
                     <div class="flex justify-center mb-4">
-                        <button onclick="fetchCoverClinicData()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow transition-all">
+                        <button onclick="fetchCoverClinicData()" class="btn-glow text-white font-bold py-2 px-6 rounded-full">
                             🔄 โหลดข้อมูลคลินิก
                         </button>
                     </div>
                     
-                    <div id="loader-cover-clinic" class="hidden flex justify-center my-4">
+                    <div id="loader-cover-clinic" class="hidden flex justify-center my-6">
                         <div class="loader"></div>
                     </div>
                     
                     <div class="overflow-x-auto">
-                        <table class="min-w-full leading-normal">
-                            <thead class="bg-gradient-to-r from-blue-100 to-purple-100">
+                        <table class="min-w-full table-glass">
+                            <thead>
                                 <tr>
-                                    <th class="px-4 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">จังหวัด</th>
-                                    <th class="px-4 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ชื่อคลินิก / โลโก้</th>
-                                    <th class="px-4 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">รีวิว</th>
-                                    <th class="px-4 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ติดต่อ</th>
+                                    <th class="px-4 py-3 text-left text-xs uppercase">จังหวัด</th>
+                                    <th class="px-4 py-3 text-left text-xs uppercase">ชื่อคลินิก / โลโก้</th>
+                                    <th class="px-4 py-3 text-left text-xs uppercase">รีวิว</th>
+                                    <th class="px-4 py-3 text-left text-xs uppercase">ติดต่อ</th>
                                 </tr>
                             </thead>
-                            <tbody id="cover-clinic-table" class="divide-y divide-gray-200">
-                                <tr><td colspan="4" class="text-center py-8 text-gray-500">กดปุ่ม "โหลดข้อมูลคลินิก" ด้านบนเพื่อดูรายชื่อ</td></tr>
+                            <tbody id="cover-clinic-table">
+                                <tr><td colspan="4" class="text-center py-10 text-gray-400">กดปุ่ม "โหลดข้อมูลคลินิก" ด้านบนเพื่อดูรายชื่อ</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -152,46 +261,42 @@
             </div>
 
             <!-- Footer -->
-            <div class="bg-gray-100 p-4 mt-6">
-                <div class="max-w-7xl mx-auto text-center text-gray-600 text-sm">
-                    <p>📍 ต.สันปูเลย อ.ดอยสะเก็ด จ.เชียงใหม่ (ใกล้แยกแม่กวง)</p>
-                    <p class="mt-1">© 2024 S.T.D. Dental Lab — ผลิตเครื่องมือทางทันตกรรมคุณภาพสูง</p>
-                </div>
+            <div class="glass-card p-4 mt-6 text-center">
+                <p class="text-blue-200 text-sm">📍 ต.สันปูเลย อ.ดอยสะเก็ด จ.เชียงใหม่ (ใกล้แยกแม่กวง)</p>
+                <p class="text-gray-400 text-xs mt-1">© 2024 S.T.D. Dental Lab — ผลิตเครื่องมือทางทันตกรรมคุณภาพสูง</p>
             </div>
         </div>
 
         <!-- Dashboard Page -->
         <div id="page-dashboard" class="hidden">
-            <!-- UPDATED: Button styling -->
-            <button onclick="showPage('page-cover')" class="btn mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
-            <h2 class="text-3xl font-bold mb-4 text-center text-gray-700">รายชื่อคลินิกทันตกรรมในเครือ</h2>
+            <button onclick="showPage('page-cover')" class="nav-btn py-2 px-5 rounded-full mb-4">⬅️ กลับหน้าหลัก</button>
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">รายชื่อคลินิกทันตกรรมในเครือ</h2>
             
             <div class="my-6 flex flex-col md:flex-row justify-center items-center gap-4">
-                <div class="flex items-center">
-                    <label for="province-filter" class="mr-2 font-semibold text-gray-700">ตัวกรองจังหวัด:</label>
-                    <select id="province-filter" class="p-2 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="flex items-center gap-2">
+                    <label class="text-gray-300 font-semibold">ตัวกรองจังหวัด:</label>
+                    <select id="province-filter" class="p-3 rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur">
                         <!-- Options populated by JS -->
                     </select>
                 </div>
-                <!-- UPDATED: Button styling -->
-                <button id="update-clinics-btn" class="btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-md">
+                <button id="update-clinics-btn" class="btn-glow text-white font-bold py-2 px-6 rounded-full">
                     🔄 อัพเดทข้อมูล
                 </button>
             </div>
             
-            <div id="loader-dashboard" class="hidden justify-center items-center my-8"><div class="loader"></div></div>
-            <div class="overflow-x-auto bg-white rounded-lg shadow">
-                <table class="min-w-full leading-normal">
-                    <thead class="bg-gray-100">
+            <div id="loader-dashboard" class="hidden flex justify-center my-8"><div class="loader"></div></div>
+            <div class="overflow-x-auto glass-card">
+                <table class="min-w-full">
+                    <thead>
                         <tr>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">จังหวัด</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ชื่อคลินิก / โลโก้</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Cover</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">รีวิว</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ติดต่อ</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">จังหวัด</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">ชื่อคลินิก / โลโก้</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">Cover</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">รีวิว</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">ติดต่อ</th>
                         </tr>
                     </thead>
-                    <tbody id="clinic-table-body">
+                    <tbody id="clinic-table-body" class="divide-y divide-white/10">
                         <!-- Data will be inserted here by JavaScript -->
                     </tbody>
                 </table>
@@ -200,51 +305,49 @@
 
         <!-- Registration Page -->
         <div id="page-register" class="hidden">
-            <!-- UPDATED: Button styling -->
-            <button onclick="showPage('page-cover')" class="btn mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
-            <div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
-                <h2 class="text-3xl font-bold mb-6 text-center text-gray-700">ลงทะเบียนคลินิกทันตกรรม</h2>
+            <button onclick="showPage('page-cover')" class="nav-btn py-2 px-5 rounded-full mb-4">⬅️ กลับหน้าหลัก</button>
+            <div class="glass-card p-8 max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">ลงทะเบียนคลินิกทันตกรรม</h2>
                 <form id="clinic-form">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="province">จังหวัด</label>
-                            <select id="province" name="province" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></select>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="clinicName">ชื่อคลินิกทันตกรรม</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="clinicName" name="clinicName" type="text" placeholder="เช่น คลินิกทันตกรรมรักฟัน" required>
-                        </div>
-                         <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="clinicPage">ลิ้งเพจคลินิก (URL)</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="clinicPage" name="clinicPage" type="url" placeholder="https://www.facebook.com/yourclinic">
+                            <label class="block text-blue-200 text-sm font-bold mb-2" for="province">จังหวัด</label>
+                            <select id="province" name="province" class="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur" required></select>
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="dentistName">ทพ. ประจำคลินิก</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dentistName" name="dentistName" type="text" placeholder="ทพ. ใจดี มีเมตตา">
-                        </div>
-                         <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="logoUrl">ลิงก์รูป LOGO (URL)</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="logoUrl" name="logoUrl" type="url" placeholder="วาง URL ของรูปโลโก้ที่นี่">
+                            <label class="block text-blue-200 text-sm font-bold mb-2" for="clinicName">ชื่อคลินิกทันตกรรม</label>
+                            <input class="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur" id="clinicName" name="clinicName" type="text" placeholder="เช่น คลินิกทันตกรรมรักฟัน" required>
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="coverUrl">ลิงก์รูป Cover (URL)</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="coverUrl" name="coverUrl" type="url" placeholder="วาง URL ของรูป Cover ที่นี่">
+                            <label class="block text-blue-200 text-sm font-bold mb-2" for="clinicPage">ลิ้งเพจคลินิก (URL)</label>
+                            <input class="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur" id="clinicPage" name="clinicPage" type="url" placeholder="https://www.facebook.com/yourclinic">
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="contactNumber">เบอร์โทรติดต่อกลับ</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="contactNumber" name="contactNumber" type="tel" placeholder="081-234-5678" required>
+                            <label class="block text-blue-200 text-sm font-bold mb-2" for="dentistName">ทพ. ประจำคลินิก</label>
+                            <input class="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur" id="dentistName" name="dentistName" type="text" placeholder="ทพ. ใจดี มีเมตตา">
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="additional">บริการเพิ่มเติม</label>
-                            <select id="additional" name="additional" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline">
+                            <label class="block text-blue-200 text-sm font-bold mb-2" for="logoUrl">ลิงก์รูป LOGO (URL)</label>
+                            <input class="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur" id="logoUrl" name="logoUrl" type="url" placeholder="วาง URL ของรูปโลโก้ที่นี่">
+                        </div>
+                        <div>
+                            <label class="block text-blue-200 text-sm font-bold mb-2" for="coverUrl">ลิงก์รูป Cover (URL)</label>
+                            <input class="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur" id="coverUrl" name="coverUrl" type="url" placeholder="วาง URL ของรูป Cover ที่นี่">
+                        </div>
+                        <div>
+                            <label class="block text-blue-200 text-sm font-bold mb-2" for="contactNumber">เบอร์โทรติดต่อกลับ</label>
+                            <input class="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur" id="contactNumber" name="contactNumber" type="tel" placeholder="081-234-5678" required>
+                        </div>
+                        <div>
+                            <label class="block text-blue-200 text-sm font-bold mb-2" for="additional">บริการเพิ่มเติม</label>
+                            <select id="additional" name="additional" class="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur">
                                 <option value="ขอชุด catalog retaianer และใบสั่งผลิตแลป">ขอชุด catalog และใบสั่งผลิตแลป</option>
                                 <option value="สั่งทำงานตัวอย่าง(ราคา50%ของค่าแลป)">สั่งทำงานตัวอย่าง (ราคา 50%)</option>
                             </select>
                         </div>
                     </div>
                     <div class="mt-8 text-center">
-                        <!-- UPDATED: Button styling -->
-                        <button class="btn bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg" type="submit">
+                        <button class="btn-glow text-white font-bold py-3 px-10 rounded-full text-lg" type="submit">
                             ลงทะเบียน
                         </button>
                     </div>
@@ -254,17 +357,15 @@
         
         <!-- Catalog Page -->
         <div id="page-catalog" class="hidden">
-            <!-- UPDATED: Button styling -->
-            <button onclick="showPage('page-cover')" class="btn mb-4 bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300">⬅️ กลับหน้าหลัก</button>
-            <h2 class="text-3xl font-bold mb-6 text-center text-gray-700">Catalog สินค้า</h2>
-             <div class="text-center mb-6">
-                <!-- UPDATED: Button styling -->
-                <button id="update-catalog-btn" class="btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-md">
+            <button onclick="showPage('page-cover')" class="nav-btn py-2 px-5 rounded-full mb-4">⬅️ กลับหน้าหลัก</button>
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">Catalog สินค้า</h2>
+            <div class="text-center mb-6">
+                <button id="update-catalog-btn" class="btn-glow text-white font-bold py-2 px-6 rounded-full">
                     🔄 อัพเดทข้อมูล
                 </button>
             </div>
-            <div id="loader-catalog" class="hidden justify-center items-center my-8"><div class="loader"></div></div>
-            <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <div id="loader-catalog" class="hidden flex justify-center my-8"><div class="loader"></div></div>
+            <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
                 <!-- Catalog items will be inserted here -->
             </div>
         </div>
@@ -272,10 +373,8 @@
     </div>
 
     <script>
-        // --- CONFIGURATION ---
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwhJWSdRTDWW9drAPulgPrQOZk2W8nMkuS9mZHowUlZCEc6aaE43-Exkx7YdOHOyTK9/exec";
 
-        // --- PAGE NAVIGATION ---
         const pages = ['page-cover', 'page-dashboard', 'page-register', 'page-catalog'];
         function showPage(pageId) {
             pages.forEach(id => {
@@ -288,7 +387,6 @@
             });
             window.scrollTo(0, 0);
 
-            // Auto-load data if not already loaded
             if (pageId === 'page-dashboard' && !localStorage.getItem('clinicData')) {
                 fetchClinicData();
             }
@@ -297,12 +395,9 @@
             }
         }
 
-        // --- DATA FETCHING (JSONP) ---
         function fetchDataJsonp(action, callbackName) {
             const oldScript = document.getElementById('jsonp-script');
-            if (oldScript) {
-                oldScript.remove();
-            }
+            if (oldScript) oldScript.remove();
             
             const script = document.createElement('script');
             script.id = 'jsonp-script';
@@ -317,104 +412,93 @@
         }
         
         function hideAllLoaders() {
-            const dashboard = document.getElementById('loader-dashboard');
-            const catalog = document.getElementById('loader-catalog');
-            const coverClinic = document.getElementById('loader-cover-clinic');
-            const coverCatalog = document.getElementById('loader-cover-catalog');
-            
-            if (dashboard) dashboard.style.display = 'none';
-            if (catalog) catalog.style.display = 'none';
-            if (coverClinic) coverClinic.classList.add('hidden');
-            if (coverCatalog) coverCatalog.classList.add('hidden');
+            document.getElementById('loader-dashboard')?.classList.add('hidden');
+            document.getElementById('loader-catalog')?.classList.add('hidden');
+            document.getElementById('loader-cover-clinic')?.classList.add('hidden');
+            document.getElementById('loader-cover-catalog')?.classList.add('hidden');
         }
 
-        // --- GLOBAL DATA STORE ---
-        let allClinicsData = []; // To hold the full list of clinics for filtering
+        let allClinicsData = [];
 
-        // --- CLINIC DASHBOARD ---
         const clinicTableBody = document.getElementById('clinic-table-body');
         const updateClinicsBtn = document.getElementById('update-clinics-btn');
-        const provinceFilterSelect = document.getElementById('province-filter'); // Get the filter element
+        const provinceFilterSelect = document.getElementById('province-filter');
 
         function fetchClinicData() {
             document.getElementById('loader-dashboard').style.display = 'flex';
             clinicTableBody.innerHTML = ''; 
             localStorage.removeItem('clinicData');
-            fetchDataJsonp('getClinics', 'handleClinicData'); // Call the handler function
+            fetchDataJsonp('getClinics', 'handleClinicData');
         }
 
-        // This function renders the table based on the filter
         function renderFilteredClinics() {
             const filterValue = provinceFilterSelect.value;
             const clinicsToRender = filterValue === 'all'
                 ? allClinicsData
                 : allClinicsData.filter(clinic => clinic.province === filterValue);
 
-            clinicTableBody.innerHTML = ''; // Clear table before rendering
+            clinicTableBody.innerHTML = '';
 
             if (clinicsToRender && clinicsToRender.length > 0) {
                 clinicsToRender.forEach(clinic => {
                     const row = document.createElement('tr');
-                    row.className = 'hover:bg-gray-50';
+                    row.className = 'hover:bg-white/10 transition-colors';
                     row.innerHTML = `
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">${clinic.province}</td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 w-12 h-12">
-                                     <a href="${clinic.logo || '#'}" target="_blank" rel="noopener noreferrer">
-                                        <img class="w-full h-full rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity" src="${clinic.logo || 'https://placehold.co/100x100/E2E8F0/A0AEC0?text=Logo'}" alt="Clinic Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/E2E8F0/A0AEC0?text=Logo';">
-                                     </a>
+                        <td class="px-5 py-4 text-sm">${clinic.province}</td>
+                        <td class="px-5 py-4 text-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-500/30">
+                                    <a href="${clinic.logo || '#'}" target="_blank" rel="noopener noreferrer">
+                                        <img class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity" src="${clinic.logo || 'https://placehold.co/100x100/1e1e3f/667eea?text=Logo'}" alt="Clinic Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1e1e3f/667eea?text=Logo';">
+                                    </a>
                                 </div>
-                                <div class="ml-3">
-                                    <p class="text-gray-900 whitespace-no-wrap font-semibold">${clinic.name}</p>
-                                    <a href="${clinic.pageLink || '#'}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700 whitespace-no-wrap text-xs">เยี่ยมชมเพจ</a>
+                                <div>
+                                    <p class="text-white font-semibold">${clinic.name}</p>
+                                    <a href="${clinic.pageLink || '#'}" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 text-xs">เยี่ยมชมเพจ</a>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <td class="px-5 py-4 text-sm">
                             <a href="${clinic.cover || '#'}" target="_blank" rel="noopener noreferrer">
-                                <img class="w-24 h-16 rounded-md object-cover cursor-pointer hover:opacity-80 transition-opacity" src="${clinic.cover || 'https://placehold.co/400x200/E2E8F0/A0AEC0?text=Cover'}" alt="Cover Photo" onerror="this.onerror=null;this.src='https://placehold.co/400x200/E2E8F0/A0AEC0?text=Cover';">
+                                <img class="w-24 h-16 rounded-lg object-cover cursor-pointer hover:opacity-80 transition-opacity border border-white/10" src="${clinic.cover || 'https://placehold.co/400x200/1e1e3f/667eea?text=Cover'}" alt="Cover Photo" onerror="this.onerror=null;this.src='https://placehold.co/400x200/1e1e3f/667eea?text=Cover';">
                             </a>
                         </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <span class="text-yellow-500 text-lg">${clinic.review || 'N/A'}</span>
+                        <td class="px-5 py-4 text-sm">
+                            <span class="text-yellow-400 text-lg">${clinic.review || 'N/A'}</span>
                         </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">${clinic.phone}</p>
+                        <td class="px-5 py-4 text-sm">
+                            <p class="text-white">${clinic.phone}</p>
                         </td>
                     `;
                     clinicTableBody.appendChild(row);
                 });
             } else {
-                 clinicTableBody.innerHTML = '<tr><td colspan="5" class="text-center p-4">ไม่พบข้อมูลคลินิกที่ตรงกับจังหวัดที่เลือก</td></tr>';
+                 clinicTableBody.innerHTML = '<tr><td colspan="5" class="text-center p-6 text-gray-400">ไม่พบข้อมูลคลินิกที่ตรงกับจังหวัดที่เลือก</td></tr>';
             }
         }
 
-        // This is the JSONP callback. It prepares data and populates the filter.
         function handleClinicData(data) {
             localStorage.setItem('clinicData', JSON.stringify(data));
-            allClinicsData = data || []; // Store data globally
+            allClinicsData = data || [];
             
-            // Populate the filter dropdown with unique provinces from the data
             const currentFilterValue = provinceFilterSelect.value;
             const uniqueProvinces = [...new Set(allClinicsData.map(c => c.province).filter(p => p))].sort();
-            provinceFilterSelect.innerHTML = '<option value="all">-- ทุกจังหวัด --</option>'; // Reset
+            provinceFilterSelect.innerHTML = '<option value="all" class="bg-gray-800">-- ทุกจังหวัด --</option>';
             uniqueProvinces.forEach(p => {
                 const option = document.createElement('option');
                 option.value = p;
                 option.textContent = p;
+                option.className = 'bg-gray-800';
                 provinceFilterSelect.appendChild(option);
             });
-             // Restore previous filter selection if it still exists
-            if (uniqueProvinces.includes(currentFilterValue)) {
+             if (uniqueProvinces.includes(currentFilterValue)) {
                 provinceFilterSelect.value = currentFilterValue;
             }
 
-            renderFilteredClinics(); // Render the table with the new data
+            renderFilteredClinics();
             document.getElementById('loader-dashboard').style.display = 'none';
         }
 
-        // --- CATALOG ---
         const catalogGrid = document.getElementById('catalog-grid');
         const updateCatalogBtn = document.getElementById('update-catalog-btn');
 
@@ -431,26 +515,25 @@
              if (data && data.length > 0) {
                  data.forEach(item => {
                     const card = document.createElement('div');
-                    card.className = 'card text-center';
+                    card.className = 'glass-card overflow-hidden hover:scale-105 transition-transform duration-300';
                     card.innerHTML = `
                         <a href="${item.imageUrl || '#'}" target="_blank" rel="noopener noreferrer">
-                           <img src="${item.imageUrl || 'https://placehold.co/300x300/E2E8F0/A0AEC0?text=Product'}" alt="${item.name}" class="w-full h-48 object-cover cursor-pointer hover:opacity-80 transition-opacity" onerror="this.onerror=null;this.src='https://placehold.co/300x300/E2E8F0/A0AEC0?text=Product';">
+                           <img src="${item.imageUrl || 'https://placehold.co/300x300/1e1e3f/667eea?text=Product'}" alt="${item.name}" class="w-full h-48 object-cover cursor-pointer hover:opacity-80 transition-opacity" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1e1e3f/667eea?text=Product';">
                         </a>
-                        <div class="p-4">
+                        <div class="p-3">
                             <a href="${item.imageUrl || '#'}" target="_blank" rel="noopener noreferrer">
-                               <h3 class="font-semibold text-gray-800 hover:text-blue-600 transition-colors">${item.name}</h3>
+                               <h3 class="font-semibold text-white text-sm hover:text-purple-400 transition-colors">${item.name}</h3>
                             </a>
                         </div>
                     `;
                     catalogGrid.appendChild(card);
                  });
              } else {
-                catalogGrid.innerHTML = '<p class="col-span-full text-center">ไม่พบข้อมูลสินค้า</p>';
+                catalogGrid.innerHTML = '<p class="col-span-full text-center text-gray-400">ไม่พบข้อมูลสินค้า</p>';
              }
             document.getElementById('loader-catalog').style.display = 'none';
         }
         
-        // --- REGISTRATION FORM ---
         const clinicForm = document.getElementById('clinic-form');
         clinicForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -485,31 +568,31 @@
         function renderCoverClinicTable() {
             const tbody = document.getElementById('cover-clinic-table');
             if (!coverClinicData || coverClinicData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-gray-500">ไม่พบข้อมูลคลินิก</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-gray-400">ไม่พบข้อมูลคลินิก</td></tr>';
                 return;
             }
             tbody.innerHTML = '';
             coverClinicData.forEach(clinic => {
                 const row = document.createElement('tr');
-                row.className = 'hover:bg-gray-50 transition-colors';
+                row.className = 'hover:bg-white/10 transition-colors';
                 row.innerHTML = `
-                    <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-semibold">${clinic.province || '-'}</span>
+                    <td class="px-4 py-4 text-sm">
+                        <span class="province-badge px-2 py-1 rounded-full text-xs font-semibold">${clinic.province || '-'}</span>
                     </td>
-                    <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
+                    <td class="px-4 py-4 text-sm">
                         <div class="flex items-center gap-3">
-                            <img class="w-10 h-10 rounded-full object-cover shadow" src="${clinic.logo || 'https://placehold.co/100x100/E2E8F0/A0AEC0?text=Logo'}" alt="Logo" onerror="this.src='https://placehold.co/100x100/E2E8F0/A0AEC0?text=Logo'">
+                            <img class="w-10 h-10 rounded-full object-cover border-2 border-purple-500/30" src="${clinic.logo || 'https://placehold.co/100x100/1e1e3f/667eea?text=Logo'}" alt="Logo" onerror="this.src='https://placehold.co/100x100/1e1e3f/667eea?text=Logo'">
                             <div>
-                                <p class="text-gray-900 font-semibold">${clinic.name || '-'}</p>
-                                <a href="${clinic.pageLink || '#'}" target="_blank" class="text-blue-500 hover:text-blue-700 text-xs">เยี่ยมชมเพจ →</a>
+                                <p class="text-white font-semibold">${clinic.name || '-'}</p>
+                                <a href="${clinic.pageLink || '#'}" target="_blank" class="text-purple-400 hover:text-purple-300 text-xs">เยี่ยมชมเพจ →</a>
                             </div>
                         </div>
                     </td>
-                    <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-                        <span class="text-yellow-500 font-bold">${clinic.review || '⭐ N/A'}</span>
+                    <td class="px-4 py-4 text-sm">
+                        <span class="text-yellow-400 font-bold">${clinic.review || '⭐ N/A'}</span>
                     </td>
-                    <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-                        <a href="tel:${clinic.phone || ''}" class="text-blue-600 hover:text-blue-800 font-semibold">${clinic.phone || '-'}</a>
+                    <td class="px-4 py-4 text-sm">
+                        <a href="tel:${clinic.phone || ''}" class="text-purple-400 hover:text-purple-300 font-semibold">${clinic.phone || '-'}</a>
                     </td>
                 `;
                 tbody.appendChild(row);
@@ -540,19 +623,17 @@
                 return;
             }
             
-            // Create slides
             track.innerHTML = coverCatalogData.map((item, i) => `
                 <div class="w-full flex-shrink-0">
                     <a href="${item.imageUrl || '#'}" target="_blank">
-                        <img src="${item.imageUrl || 'https://placehold.co/600x400/E2E8F0/A0AEC0?text=Product'}" alt="${item.name || 'สินค้า'}" class="w-full h-64 md:h-80 object-cover rounded-xl" onerror="this.src='https://placehold.co/600x400/E2E8F0/A0AEC0?text=Product'">
-                        <p class="text-center mt-2 font-semibold text-gray-700">${item.name || 'สินค้า ' + (i+1)}</p>
+                        <img src="${item.imageUrl || 'https://placehold.co/600x400/1e1e3f/667eea?text=Product'}" alt="${item.name || 'สินค้า'}" class="w-full h-64 md:h-80 object-cover rounded-xl" onerror="this.src='https://placehold.co/600x400/1e1e3f/667eea?text=Product'">
+                        <p class="text-center mt-2 font-semibold text-white">${item.name || 'สินค้า ' + (i+1)}</p>
                     </a>
                 </div>
             `).join('');
             
-            // Create dots
             dotsContainer.innerHTML = coverCatalogData.map((_, i) => `
-                <button onclick="goToSlide(${i})" class="w-3 h-3 rounded-full ${i === 0 ? 'bg-blue-500' : 'bg-gray-300'} transition-colors"></button>
+                <button onclick="goToSlide(${i})" class="w-3 h-3 rounded-full ${i === 0 ? 'dot-active' : 'bg-gray-600'} transition-colors"></button>
             `).join('');
             
             currentSlide = 0;
@@ -563,9 +644,8 @@
         function updateSlidePosition() {
             const track = document.getElementById('slideshow-track');
             track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            // Update dots
             document.querySelectorAll('#slideshow-dots button').forEach((dot, i) => {
-                dot.className = `w-3 h-3 rounded-full transition-colors ${i === currentSlide ? 'bg-blue-500' : 'bg-gray-300'}`;
+                dot.className = `w-3 h-3 rounded-full transition-colors ${i === currentSlide ? 'dot-active' : 'bg-gray-600'}`;
             });
         }
         
@@ -601,39 +681,16 @@
             startAutoSlide();
         }
 
-        // ===== EXISTING: hideAllLoaders (for consistency) =====
-        function hideAllLoaders() {
-            document.getElementById('loader-dashboard')?.classList.add('hidden');
-            document.getElementById('loader-catalog')?.classList.add('hidden');
-            document.getElementById('loader-cover-clinic')?.classList.add('hidden');
-            document.getElementById('loader-cover-catalog')?.classList.add('hidden');
-        }
-
-        // --- EXISTING: showPage (unchanged) ---
-        // ... (kept from original)
-
-        // --- EXISTING: DATA FETCHING (JSONP) (unchanged) ---
-        // ... (kept from original)
-
-        // --- EXISTING: CLINIC DASHBOARD (unchanged) ---
-        // ... (kept from original)
-
-        // --- EXISTING: CATALOG (unchanged) ---
-        // ... (kept from original)
-
-        // --- EXISTING: REGISTRATION FORM (unchanged) ---
-        // ... (kept from original)
-
-        // --- EXISTING: INITIALIZATION (updated) ---
         const provinces = ["กระบี่", "กรุงเทพมหานคร", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี", "ฉะเชิงเทรา", "ชลบุรี", "ชัยนาท", "ชัยภูมิ", "ชุมพร", "เชียงราย", "เชียงใหม่", "ตรัง", "ตราด", "ตาก", "นครนายก", "นครปฐม", "นครพนม", "นครราชสีมา", "นครศรีธรรมราช", "นครสวรรค์", "นนทบุรี", "นราธิวาส", "น่าน", "บึงกาฬ", "บุรีรัมย์", "ปทุมธานี", "ประจวบคีรีขันธ์", "ปราจีนบุรี", "ปัตตานี", "พระนครศรีอยุธยา", "พะเยา", "พังงา", "พัทลุง", "พิจิตร", "พิษณุโลก", "เพชรบุรี", "เพชรบูรณ์", "แพร่", "ภูเก็ต", "มหาสารคาม", "มุกดาหาร", "แม่ฮ่องสอน", "ยโสธร", "ยะลา", "ร้อยเอ็ด", "ระนอง", "ระยอง", "ราชบุรี", "ลพบุรี", "ลำปาง", "ลำพูน", "เลย", "ศรีสะเกษ", "สกลนคร", "สงขลา", "สตูล", "สมุทรปราการ", "สมุทรสงคราม", "สมุทรสาคร", "สระแก้ว", "สระบุรี", "สิงห์บุรี", "สุโขทัย", "สุพรรณบุรี", "สุราษฎร์ธานี", "สุรินทร์", "หนองคาย", "หนองบัวลำภู", "อ่างทอง", "อำนาจเจริญ", "อุดรธานี", "อุตรดิตถ์", "อุทัยธานี", "อุบลราชธานี"];
 
         function populateProvinces() {
             const provinceSelect = document.getElementById('province');
-            provinceSelect.innerHTML = '<option value="" disabled selected>--- เลือกจังหวัด ---</option>';
+            provinceSelect.innerHTML = '<option value="" disabled selected class="bg-gray-800">--- เลือกจังหวัด ---</option>';
             provinces.forEach(p => {
                 const option = document.createElement('option');
                 option.value = p;
                 option.textContent = p;
+                option.className = 'bg-gray-800';
                 provinceSelect.appendChild(option);
             });
         }
@@ -655,7 +712,6 @@
             updateClinicsBtn.addEventListener('click', fetchClinicData);
             updateCatalogBtn.addEventListener('click', fetchCatalogData);
             provinceFilterSelect.addEventListener('change', renderFilteredClinics);
-            // Auto-load cover page data
             fetchCoverClinicData();
             fetchCoverCatalogData();
         };
