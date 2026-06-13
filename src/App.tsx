@@ -315,12 +315,38 @@ export default function App() {
     }
   };
 
+  const showDbInfo = () => {
+    Swal.fire({
+      title: 'สถานะระบบหลังบ้าน (Database connection)',
+      html: `
+        <div class="text-left text-sm space-y-3 font-sans">
+          <p class="text-gray-600">แอปพลิเคชันนี้เชื่อมโยงกับระบบจัดเก็บข้อมูลแบบกระจายคลาวด์บน <b>Google Sheets</b> ของแลปผ่าน Web App API</p>
+          <div class="p-3 bg-purple-50 rounded-lg border border-purple-100">
+            <p class="font-medium text-purple-800">💡 รายละเอียดโหมดจำลอง (Demo Mode):</p>
+            <p class="text-xs text-purple-700 mt-1">
+              เนื่องจากแอปทำงานในสภาพแวดล้อม Sandbox ของเบราว์เซอร์ หากตรวจพบข้อจำกัดทางเครือข่าย/CORS ระบบจะเปิดโหมดทัศนจรจำลองโดยอัตโนมัติ เพื่อให้ท่านทดลองกรอกฟอร์มลงทะเบียน ดูหน้าจอ แดชบอร์ด และส่วนอื่นๆ ได้อย่างราบรื่น
+            </p>
+          </div>
+          <p class="font-semibold text-gray-700">คำแนะนำระบบผลิตจริง:</p>
+          <ol class="list-decimal pl-5 text-xs text-gray-650 space-y-1">
+            <li>เปิดใช้งาน Google App Script ในไฟล์ชีทหลัก</li>
+            <li>Deploy Web App กำหนดสิทธิ์ให้ "Everyone (ทุกคน)"</li>
+            <li>ตั้งค่า Script URL ในไฟล์ปรับแต่งเพื่อซิงก์ข้อมูลตามจริง</li>
+          </ol>
+        </div>
+      `,
+      icon: dbStatus === 'connected' ? 'success' : 'info',
+      confirmButtonText: 'ตกลง',
+      confirmButtonColor: '#9333ea',
+    });
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6 min-h-screen flex flex-col justify-between">
       {/* Dynamic Rendered Canvas */}
       <div>
         {/* Navigation panel */}
-        <Header activePage={activePage} onNavigate={handleNavigation} dbStatus={dbStatus} />
+        <Header activePage={activePage} onNavigate={handleNavigation} />
 
         {/* Dynamic Pages */}
         {activePage === 'cover' && (
@@ -379,16 +405,44 @@ export default function App() {
       </div>
 
       {/* Decorative footer card */}
-      <footer className="mt-12 bg-white/60 backdrop-blur-md border border-purple-100 rounded-2xl p-5 text-center shadow-md">
-        <p className="text-purple-900 font-semibold text-sm">
-          📍 ห้างหุ้นส่วนจำกัด เอส.ที.ดี. เด็นตอล แลป (S.T.D. DENTAL LAB)
-        </p>
-        <p className="text-purple-600/80 text-xs mt-1">
-          ต.สันปูเลย อ.ดอยสะเก็ด จ.เชียงใหม่ | บริการจัดส่งและร่วมมือกับคลินิกทันตกรรมทั่วประเทศ
-        </p>
-        <p className="text-gray-400 text-[10px] sm:text-xs mt-2 font-mono">
-          © 2026 S.T.D. Dental Lab — Premium Grade Dental Prosthetics. All Rights Reserved.
-        </p>
+      <footer className="mt-12 bg-white/60 backdrop-blur-md border border-purple-100 rounded-2xl p-5 text-center shadow-md flex flex-col items-center gap-4">
+        {/* Dynamic Status Pill */}
+        <div className="flex justify-center">
+          <button
+            id="db-status-pill"
+            onClick={showDbInfo}
+            className={`text-xs px-3.5 py-1.5 rounded-full font-semibold flex items-center gap-2 border transition-all duration-300 transform active:scale-95 cursor-pointer ${
+              dbStatus === 'connected'
+                ? 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
+                : dbStatus === 'demo'
+                ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100 animate-pulse'
+                : 'bg-yellow-50 text-yellow-700 border-yellow-200'
+            }`}
+          >
+            <span className={`w-2.5 h-2.5 rounded-full ${
+              dbStatus === 'connected' 
+                ? 'bg-green-500' 
+                : dbStatus === 'demo' 
+                ? 'bg-amber-500' 
+                : 'bg-yellow-500 animate-ping'
+            }`} />
+            {dbStatus === 'connected' && '🔵 เชื่อมหลังบ้านสำเร็จ'}
+            {dbStatus === 'demo' && '🟡 โหมดจำลอง (Demo Mode)'}
+            {dbStatus === 'checking' && 'กำลังเช็คการเชื่อมต่อ...'}
+          </button>
+        </div>
+
+        <div>
+          <p className="text-purple-900 font-semibold text-sm">
+            📍 ห้างหุ้นส่วนจำกัด เอส.ที.ดี. เด็นตอล แลป (S.T.D. DENTAL LAB)
+          </p>
+          <p className="text-purple-650 text-xs mt-1">
+            ต.สันปูเลย อ.ดอยสะเก็ด จ.เชียงใหม่ | บริการจัดส่งและร่วมมือกับคลินิกทันตกรรมทั่วประเทศ
+          </p>
+          <p className="text-gray-400 text-[10px] sm:text-xs mt-2 font-mono">
+            © 2026 S.T.D. Dental Lab — Premium Grade Dental Prosthetics. All Rights Reserved.
+          </p>
+        </div>
       </footer>
     </div>
   );

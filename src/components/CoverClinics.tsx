@@ -52,7 +52,7 @@ export default function CoverClinics({ clinics, onRefresh, isLoading }: CoverCli
     <div className="bg-white/80 backdrop-blur-xl border border-purple-100 rounded-3xl p-6 shadow-xl shadow-purple-100/10 mb-8">
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-class text-purple-950 flex items-center justify-center gap-2">
-          🏥 คลินิกทันตกรรมพันธมิตรระดับเกียรติยศ (Prestigious Partner Clinics)
+          🏥 คลินิกทันตกรรมพันธมิตรของเรา ( Partner Clinics)
         </h2>
         <p className="text-purple-650 text-sm mt-1.5 font-light">
           คลินิกทันตกรรมชั้นนำที่ผสานความร่วมมือกับ เอส.ที.ดี. เด็นตอล แลป ร่วมรังสรรค์รอยยิ้มระดับสากลด้วยฝีมือช่างระดับสูง (Refined Craftsmanship)
@@ -129,7 +129,7 @@ export default function CoverClinics({ clinics, onRefresh, isLoading }: CoverCli
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-20">
           <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
-          <p className="text-purple-650 text-xs font-bold mt-4 animate-pulse">กำลังประมวลผลรายชื่อพันธมิตรระดับเกียรติยศ...</p>
+          <p className="text-purple-650 text-xs font-bold mt-4 animate-pulse">กำลังประมวลผลรายชื่อคลินิกพันธมิตรของเรา...</p>
         </div>
       ) : filteredClinics.length === 0 ? (
         <div className="text-center py-16 bg-purple-50/10 rounded-2xl border border-dashed border-purple-100 text-purple-400">

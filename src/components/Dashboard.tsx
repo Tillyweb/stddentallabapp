@@ -449,7 +449,7 @@ export default function Dashboard({
           ย้อนกลับหน้าแรก
         </button>
         <h2 className="text-xl sm:text-2xl font-extrabold text-purple-950 text-center flex-1">
-          📊 แดชบอร์ดการจัดการพันธมิตรระดับเกียรติยศ (Prestigious Partner Curation & C-Suite)
+          📊 แดชบอร์ดการจัดการคลินิกพันธมิตรของเรา (Partner Clinics)
         </h2>
         <div className="flex gap-2.5 shrink-0 w-full lg:w-auto justify-end">
           <button
