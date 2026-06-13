@@ -11,6 +11,7 @@ import CoverClinics from './components/CoverClinics';
 import RegisterForm from './components/RegisterForm';
 import Dashboard from './components/Dashboard';
 import CatalogGrid from './components/CatalogGrid';
+import PremiumTimepiece from './components/PremiumTimepiece';
 
 export default function App() {
   // Navigation State
@@ -324,6 +325,9 @@ export default function App() {
         {/* Dynamic Pages */}
         {activePage === 'cover' && (
           <div className="space-y-8 animate-fade-in">
+            {/* Premium Horology / Timepiece Status Center */}
+            <PremiumTimepiece />
+
             {/* Header / Interactive Slideshow */}
             <Slideshow 
               items={catalogItems} 
