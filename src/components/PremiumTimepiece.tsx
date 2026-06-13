@@ -107,46 +107,46 @@ export default function PremiumTimepiece() {
   const thaiYear = time.getFullYear() + 543;
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-linear-to-br from-slate-900 via-slate-950 to-slate-900 p-6 text-white shadow-2xl shadow-slate-950/50">
+    <div className="relative overflow-hidden rounded-3xl border border-purple-100 bg-white/70 backdrop-blur-xl p-6 text-purple-950 shadow-xl shadow-purple-100/20">
       {/* Decorative luxury watch dial lines in background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-800/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-100/20 via-transparent to-transparent pointer-events-none" />
       <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Greeting Header & Title */}
-      <div className="flex flex-col sm:flex-row justify-between items-center border-b border-slate-800/60 pb-4 mb-5 gap-3">
+      <div className="flex flex-col sm:flex-row justify-between items-center border-b border-purple-100/60 pb-4 mb-5 gap-3">
         <div className="flex items-center gap-2">
-          <Compass className="w-5 h-5 text-amber-500 animate-spin-slow" />
-          <span className="text-[10px] tracking-[0.2em] font-light text-slate-400 uppercase">
+          <Compass className="w-5 h-5 text-purple-600 animate-spin-slow" />
+          <span className="text-[10px] tracking-[0.2em] font-medium text-purple-800/80 uppercase">
             HOROLOGY · PRECISION CHRONOMETER
           </span>
         </div>
-        <div className="text-[10px] tracking-[0.15em] font-semibold text-amber-400 bg-amber-500/5 border border-amber-500/10 px-3 py-1 rounded-full">
+        <div className="text-[10px] tracking-[0.15em] font-bold text-amber-700 bg-amber-50 border border-amber-100 px-3 py-1 rounded-full">
           {greeting}
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
         {/* Main Display: Premium Timepiece Dial (Clock) */}
-        <div className="lg:col-span-6 flex flex-col items-center justify-center p-3 text-center border-r border-slate-800/40 lg:pr-8">
-          <span className="text-[10px] tracking-[0.3em] text-slate-500 font-light mb-1">
+        <div className="lg:col-span-6 flex flex-col items-center justify-center p-3 text-center border-r border-purple-100/80 lg:pr-8">
+          <span className="text-[10px] tracking-[0.3em] text-purple-800/60 font-medium mb-1">
             LOCAL TIMEPIECE
           </span>
 
           {/* Time text with monospaced style, light weight, letter spacing and separator */}
-          <div className="text-3xl sm:text-4xl font-extralight tracking-widest text-slate-100 font-mono my-2.5 flex items-center gap-1">
+          <div className="text-3xl sm:text-4xl font-light tracking-widest text-purple-950 font-mono my-2.5 flex items-center gap-1">
             <span>{hStr}</span>
-            <span className="text-amber-500/80 animate-pulse font-sans">∶</span>
+            <span className="text-amber-500 animate-pulse font-sans">∶</span>
             <span>{mStr}</span>
-            <span className="text-amber-500/80 animate-pulse font-sans">∶</span>
-            <span className="text-slate-400 text-2xl sm:text-3xl">{sStr}</span>
+            <span className="text-amber-500 animate-pulse font-sans">∶</span>
+            <span className="text-purple-600/80 text-2xl sm:text-3xl">{sStr}</span>
           </div>
 
-          <span className="text-[9px] tracking-[0.4em] font-light text-slate-400 mt-1 uppercase">
+          <span className="text-[9px] tracking-[0.4em] font-medium text-purple-800/80 mt-1 uppercase">
             {meridiem} ( {timezone} )
           </span>
 
           {/* Separator · label indicators */}
-          <div className="text-[8px] tracking-[0.25em] text-slate-600 uppercase mt-2.5">
+          <div className="text-[8px] tracking-[0.25em] text-purple-400 uppercase mt-2.5">
             HOURS · MINUTES · SECONDS
           </div>
         </div>
@@ -155,48 +155,48 @@ export default function PremiumTimepiece() {
         <div className="lg:col-span-6 grid grid-cols-2 gap-4">
           
           {/* Complication 1: Calendar Date */}
-          <div className="bg-slate-900/40 border border-slate-800/50 p-3.5 rounded-2xl flex flex-col justify-between">
-            <span className="text-[9px] tracking-wider text-slate-500 uppercase block mb-1">
+          <div className="bg-purple-50/30 border border-purple-100/50 p-3.5 rounded-2xl flex flex-col justify-between shadow-xs">
+            <span className="text-[9px] tracking-wider text-purple-800/60 uppercase block mb-1">
               Calendar Date
             </span>
-            <span className="text-sm font-light text-slate-200 tracking-wide">
+            <span className="text-sm font-semibold text-purple-900 tracking-wide">
               {thaiDay} {thaiMonth} {thaiYear}
             </span>
-            <span className="text-[9px] text-slate-500 mt-1">
+            <span className="text-[9px] text-purple-500 mt-1 font-medium">
               Week {weekNum} of {time.getFullYear()}
             </span>
           </div>
 
           {/* Complication 2: Moon Phase */}
-          <div className="bg-slate-900/40 border border-slate-800/50 p-3.5 rounded-2xl flex flex-col justify-between">
-            <span className="text-[9px] tracking-wider text-slate-500 uppercase block mb-1">
+          <div className="bg-purple-50/30 border border-purple-100/50 p-3.5 rounded-2xl flex flex-col justify-between shadow-xs">
+            <span className="text-[9px] tracking-wider text-purple-800/60 uppercase block mb-1">
               Moon Phase
             </span>
             <div className="flex items-center gap-2 my-0.5">
               <span className="text-2xl">{moon.emoji}</span>
-              <span className="text-xs font-light text-amber-300 tracking-wider font-mono">
+              <span className="text-xs font-semibold text-amber-700 tracking-wider font-mono">
                 {moon.name}
               </span>
             </div>
-            <span className="text-[8px] text-slate-500 uppercase tracking-widest mt-1">
+            <span className="text-[8px] text-purple-500 uppercase tracking-widest mt-1 font-medium">
               As of Today
             </span>
           </div>
 
           {/* Complication 3: Day Progress Elapsed */}
-          <div className="bg-slate-900/40 border border-slate-800/50 p-3.5 rounded-2xl col-span-2">
-            <div className="flex justify-between items-center text-[9px] text-slate-500 uppercase mb-2">
+          <div className="bg-purple-50/30 border border-purple-100/50 p-3.5 rounded-2xl col-span-2 shadow-xs">
+            <div className="flex justify-between items-center text-[9px] text-purple-800/60 uppercase mb-2">
               <span className="tracking-wider">Elapsed Duration</span>
-              <span className="font-mono text-amber-400 font-medium">{dayProgress}% OF DAY</span>
+              <span className="font-mono text-amber-600 font-bold">{dayProgress}% OF DAY</span>
             </div>
             {/* Progress bar */}
-            <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-purple-100/60 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-purple-600 via-indigo-500 to-amber-400 rounded-full transition-all duration-1000"
+                className="h-full bg-gradient-to-r from-purple-650 via-indigo-550 to-amber-500 rounded-full transition-all duration-1000"
                 style={{ width: `${dayProgress}%` }}
               />
             </div>
-            <div className="flex justify-between text-[8px] text-slate-600 mt-1.5">
+            <div className="flex justify-between text-[8px] text-purple-400 mt-1.5 font-medium">
               <span>00 ∶ 00 ANTE MERIDIEM</span>
               <span>24 ∶ 00 POST MERIDIEM</span>
             </div>
@@ -206,20 +206,20 @@ export default function PremiumTimepiece() {
       </div>
 
       {/* Sun Schedule Interval Info Panel */}
-      <div className="mt-5 pt-4 border-t border-slate-800/60 flex flex-wrap justify-between items-center gap-4 text-slate-400 text-xs font-light">
+      <div className="mt-5 pt-4 border-t border-purple-100/80 flex flex-wrap justify-between items-center gap-4 text-purple-800/80 text-xs font-light">
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1 text-slate-400">
-            <Sunrise className="w-3.5 h-3.5 text-amber-500" />
+          <span className="flex items-center gap-1 text-purple-800/80 font-medium">
+            <Sunrise className="w-3.5 h-3.5 text-amber-600" />
             <span className="text-[9px] uppercase tracking-wider">Sunrise : 05·52</span>
           </span>
-          <span className="text-slate-700">|</span>
-          <span className="flex items-center gap-1 text-slate-400">
-            <Sunset className="w-3.5 h-3.5 text-purple-400" />
+          <span className="text-purple-200">|</span>
+          <span className="flex items-center gap-1 text-purple-800/80 font-medium">
+            <Sunset className="w-3.5 h-3.5 text-purple-650" />
             <span className="text-[9px] uppercase tracking-wider">Sunset : 18·58</span>
           </span>
         </div>
-        <div className="text-[8px] tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
-          <Activity className="w-3 h-3 text-emerald-500" />
+        <div className="text-[8px] tracking-widest text-purple-500 uppercase flex items-center gap-1.5 font-bold">
+          <Activity className="w-3 h-3 text-emerald-600 animate-pulse" />
           SYSTEM OPERATING AT OPTIMAL INTERVAL
         </div>
       </div>

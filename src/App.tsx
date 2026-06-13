@@ -325,9 +325,6 @@ export default function App() {
         {/* Dynamic Pages */}
         {activePage === 'cover' && (
           <div className="space-y-8 animate-fade-in">
-            {/* Premium Horology / Timepiece Status Center */}
-            <PremiumTimepiece />
-
             {/* Header / Interactive Slideshow */}
             <Slideshow 
               items={catalogItems} 
@@ -341,6 +338,9 @@ export default function App() {
               onRefresh={syncClinics} 
               isLoading={isClinicsLoading} 
             />
+
+            {/* Premium Horology / Timepiece Status Center */}
+            <PremiumTimepiece />
           </div>
         )}
 
