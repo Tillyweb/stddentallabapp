@@ -1,4 +1,3 @@
-import { HeartPulse } from 'lucide-react';
 import { ActivePage } from '../types';
 
 interface HeaderProps {
@@ -12,8 +11,8 @@ export default function Header({ activePage, onNavigate }: HeaderProps) {
       <div className="flex flex-col md:flex-row justify-between items-center gap-6">
         {/* Branding & Status Indicator */}
         <div className="text-center md:text-left flex flex-col sm:flex-row items-center gap-4">
-          <div className="p-3 bg-purple-100 text-purple-700 rounded-2xl flex items-center justify-center shadow-inner">
-            <HeartPulse className="w-8 h-8 animate-pulse text-purple-600" />
+          <div className="w-14 h-14 bg-gradient-to-tr from-purple-100 to-indigo-100 rounded-2xl flex items-center justify-center overflow-hidden shadow-inner border border-purple-100 transition-transform duration-300 hover:scale-105">
+            <img src="/logo.jpg" alt="S.T.D. DENTAL LAB Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-purple-950 tracking-tight flex items-center justify-center sm:justify-start gap-1">
