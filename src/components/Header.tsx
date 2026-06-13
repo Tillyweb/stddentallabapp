@@ -1,4 +1,4 @@
-import { Stethoscope, Globe, Plus, Layers, ShieldCheck, HeartPulse } from 'lucide-react';
+import { HeartPulse, Compass } from 'lucide-react';
 import { ActivePage } from '../types';
 import Swal from 'sweetalert2';
 
@@ -53,7 +53,7 @@ export default function Header({ activePage, onNavigate, dbStatus }: HeaderProps
                 <button
                   id="db-status-pill"
                   onClick={showDbInfo}
-                  className={`text-xs px-3.5 py-1.5 rounded-full font-semibold flex items-center gap-2 border transition-all duration-300 transform active:scale-95 ${
+                  className={`text-xs px-3.5 py-1.5 rounded-full font-semibold flex items-center gap-2 border transition-all duration-300 transform active:scale-95 cursor-pointer ${
                     dbStatus === 'connected'
                       ? 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
                       : dbStatus === 'demo'
@@ -81,60 +81,65 @@ export default function Header({ activePage, onNavigate, dbStatus }: HeaderProps
         </div>
 
         {/* Action / Navigation Buttons */}
-        <div className="flex flex-wrap gap-2.5 justify-center items-center">
+        <div className="flex flex-row justify-center items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
           <button
             id="nav-btn-home"
             onClick={() => onNavigate('cover')}
-            className={`py-2 px-5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-350 cursor-pointer ${
+            className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl transition-all duration-300 cursor-pointer shadow-md hover:scale-108 active:scale-95 ${
               activePage === 'cover'
-                ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20 scale-105'
-                : 'bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 hover:scale-103'
+                ? 'bg-purple-600 text-white shadow-purple-500/25 scale-108 ring-2 ring-purple-300'
+                : 'bg-purple-50 text-purple-850 border border-purple-150 hover:bg-purple-100'
             }`}
+            title="หน้าแรก (Home)"
           >
-            🏠 หน้าแรก
+            🏠
           </button>
           
           <button
             id="nav-btn-register"
             onClick={() => onNavigate('register')}
-            className={`py-2 px-5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-350 cursor-pointer flex items-center gap-1.5 ${
+            className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl transition-all duration-300 cursor-pointer shadow-md hover:scale-108 active:scale-95 ${
               activePage === 'register'
-                ? 'bg-purple-650 text-white shadow-lg shadow-purple-500/30 scale-105'
-                : 'bg-purple-50/50 text-purple-700 hover:bg-purple-100/80 hover:scale-103'
+                ? 'bg-purple-650 text-white shadow-purple-500/30 scale-108 ring-2 ring-purple-300'
+                : 'bg-purple-50 text-purple-700 border border-purple-150 hover:bg-purple-100'
             }`}
+            title="ลงทะเบียนคลินิก"
           >
-            <Plus className="w-3.5 h-3.5" /> ลงทะเบียนคลินิก
+            ✍️
           </button>
 
           <button
             id="nav-btn-dashboard"
             onClick={() => onNavigate('dashboard')}
-            className={`py-2 px-5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-350 cursor-pointer ${
+            className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl transition-all duration-300 cursor-pointer shadow-md hover:scale-108 active:scale-95 ${
               activePage === 'dashboard'
-                ? 'bg-purple-700 text-white shadow-lg shadow-purple-500/30 scale-105'
-                : 'bg-purple-50/50 text-purple-700 hover:bg-purple-100/80 hover:scale-103'
+                ? 'bg-purple-700 text-white shadow-purple-500/30 scale-108 ring-2 ring-purple-300'
+                : 'bg-purple-50 text-purple-700 border border-purple-150 hover:bg-purple-100'
             }`}
+            title="แดชบอร์ดพาร์ทเนอร์"
           >
-            📊 แดชบอร์ดพาร์ทเนอร์
+            📊
           </button>
 
           <button
             id="nav-btn-catalog"
             onClick={() => onNavigate('catalog')}
-            className={`py-2 px-5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-350 cursor-pointer flex items-center gap-1.5 ${
+            className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl transition-all duration-300 cursor-pointer shadow-md hover:scale-108 active:scale-95 ${
               activePage === 'catalog'
-                ? 'bg-purple-800 text-white shadow-lg shadow-purple-500/30 scale-105'
-                : 'bg-purple-50/50 text-purple-700 hover:bg-purple-100/80 hover:scale-103'
+                ? 'bg-purple-800 text-white shadow-purple-500/30 scale-108 ring-2 ring-purple-300'
+                : 'bg-purple-50 text-purple-700 border border-purple-150 hover:bg-purple-100'
             }`}
+            title="สินค้า/ผลิตภัณฑ์ (Catalog)"
           >
-            <Layers className="w-3.5 h-3.5" /> สินค้า/ผลิตภัณฑ์
+            📦
           </button>
 
           <button
             onClick={() => window.open('https://lin.ee/pS4MUIo', '_blank')}
-            className="bg-green-500 text-white hover:bg-green-600 shadow-md hover:shadow-green-500/20 font-bold py-2 px-5 rounded-full text-xs sm:text-sm transition-all duration-300 hover:scale-105"
+            className="w-12 h-12 rounded-full flex items-center justify-center text-2xl bg-green-500 text-white hover:bg-green-600 shadow-md hover:shadow-green-500/20 transition-all duration-300 hover:scale-108 active:scale-95 cursor-pointer"
+            title="LINE ติดต่อแลป"
           >
-            💚 LINE ติดต่อแลป
+            💚
           </button>
         </div>
       </div>
