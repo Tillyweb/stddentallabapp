@@ -155,7 +155,7 @@ export default function RegisterForm({ onBack, onSubmit }: RegisterFormProps) {
 
       <div className="text-center mb-8">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-purple-950 flex items-center justify-center gap-2">
-          ✍️ ร่วมเป็นพันธมิตรรังสรรค์งานประณีตเฉพาะบุคคล (Bespoke Partner Registration)
+          ✍️ ลงทะเบียนร่วมเป็นคลินิกพันธมิตร (Partner Clinic Registration)
         </h2>
         <p className="text-purple-650 text-sm mt-1.5 font-light">
           ยกระดับคลินิกทันตกรรมของท่านสู่ความโดดเด่นด้วยทันตกรรมประดิษฐ์ระดับ World-class จาก เอส.ที.ดี. เด็นตอล แลป
