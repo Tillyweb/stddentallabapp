@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.T.D.DENTALLAB - Partner Clinics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 30%, #e9d5ff 60%, #f5f3ff 100%);
+            min-height: 100vh;
+            color: #374151;
+        }
+        
+        /* Glassmorphism Card - Light */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1), inset 0 0 60px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Animated Gradient Header - Light Purple */
+        .gradient-header {
+            background: linear-gradient(-45deg, #f5f3ff, #e9d5ff, #d8b4fe, #c084fc, #f5f3ff);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Neon Glow Button - Light */
+        .btn-glow {
+            background: linear-gradient(135deg, #9333ea, #a855f7);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-glow:hover::before { left: 100%; }
+        .btn-glow:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.5), 0 0 60px rgba(168, 85, 247, 0.3);
+        }
+        
+        .btn-glow-yellow {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+        .btn-glow-yellow:hover {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.5), 0 0 60px rgba(217, 119, 6, 0.3);
+        }
+        
+        /* Table Styling - Light */
+        .table-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .table-glass thead {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(192, 132, 252, 0.15));
+        }
+        .table-glass th {
+            color: #6b21a8;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .table-glass td {
+            color: #374151;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+        .table-glass tr:hover td {
+            background: rgba(139, 92, 246, 0.08);
+        }
+        
+        /* Slide Glow Effect - Light */
+        .slide-glow {
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Fade-in Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Pulse Glow */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(147, 51, 234, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(147, 51, 234, 0.4); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        
+        /* Loader */
+        .loader {
+            border: 4px solid rgba(147, 51, 234, 0.1);
+            border-top: 4px solid #9333ea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Nav buttons */
+        .nav-btn {
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            color: #7c3aed;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
+            background: rgba(147, 51, 234, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Slideshow arrows */
+        .slide-arrow {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            color: #7c3aed;
+            transition: all 0.3s ease;
+        }
+        .slide-arrow:hover {
+            background: rgba(147, 51, 234, 0.2);
+            transform: scale(1.1);
+        }
+        
+        /* Province badge */
+        .province-badge {
+            background: linear-gradient(135deg, #f3e8ff33, #d8b4fe33);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #7c3aed;
+        }
+        
+        /* Dot indicator */
+        .dot-active {
+            background: #9333ea;
+            box-shadow: 0 0 10px rgba(147, 51, 234, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="max-w-7xl mx-auto p-4">
+
+        <!-- Cover Page -->
+        <div id="page-cover">
+            <!-- Header -->
+            <div class="gradient-header rounded-2xl p-4 mb-6 sticky top-4 z-50 glass-card">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-center md:text-left">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                            <h1 class="text-2xl md:text-3xl font-bold text-purple-900">🦷 S.T.D. DENTAL LAB</h1>
+                            <!-- Status Badges -->
+                            <div class="flex justify-center sm:justify-start">
+                                <span id="db-status-pill" class="text-xs bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium flex items-center gap-1.5 border border-yellow-200">
+                                    <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
+                                    กำลังเช็คการเชื่อมต่อ...
+                                </span>
+                            </div>
+                        </div>
+                        <p class="text-purple-600 text-sm mt-0.5">ห้างหุ้นส่วนจำกัด เอส.ที.ดี.เด็นตอล แลป จ.เชียงใหม่</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <button onclick="window.open('https://lin.ee/pS4MUIo', '_blank')" class="btn-glow text-white font-bold py-2 px-5 rounded-full text-xs sm:text-sm">
+                            📞 ติดต่อเรา
+                        </button>
+                        <button onclick="navigate('register')" class="btn-glow btn-glow-yellow text-white font-bold py-2 px-5 rounded-full text-xs sm:text-sm">
+                            ✍️ ลงทะเบียนคลินิก
+                        </button>
+                        <button onclick="navigate('dashboard')" class="btn-glow text-white font-bold py-2 px-5 rounded-full text-xs sm:text-sm">
+                            📊 แดชบอร์ดคลินิก
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="space-y-6">
+                
+                <!-- Catalog Slideshow Section -->
+                <div class="glass-card p-6 fade-in">
+                    <h2 class="text-2xl font-bold text-purple-900 mb-6 text-center">📦 Catalog สินค้าของเรา</h2>
+                    
+                    <div class="flex justify-center mb-4">
+                        <button onclick="fetchCoverCatalogData()" class="btn-glow text-white font-bold py-2 px-6 rounded-full">
+                            🔄 รีเฟรชสินค้า
+                        </button>
+                    </div>
+                    
+                    <div id="loader-cover-catalog" class="hidden flex justify-center my-6">
+                        <div class="loader"></div>
+                    </div>
+                    
+                    <!-- Slideshow Container -->
+                    <div class="relative max-w-3xl mx-auto">
+                        <div id="catalog-slideshow" class="overflow-hidden rounded-2xl slide-glow aspect-[3/2] md:aspect-[16/9]">
+                            <div id="slideshow-track" class="flex h-full transition-transform duration-500">
+                                <!-- Slides will be inserted here by JS -->
+                            </div>
+                        </div>
+                        <!-- Prev/Next Arrows -->
+                        <button onclick="prevSlide()" class="slide-arrow absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-xl z-10">◀</button>
+                        <button onclick="nextSlide()" class="slide-arrow absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-xl z-10">▶</button>
+                        <!-- Dots -->
+                        <div id="slideshow-dots" class="flex justify-center gap-2 mt-4"></div>
+                    </div>
+                </div>
+
+                <!-- Clinic Table Section -->
+                <div class="glass-card p-6 fade-in" style="animation-delay: 0.2s">
+                    <h2 class="text-2xl font-bold text-purple-900 mb-6 text-center">🏥 รายชื่อคลินิกทันตกรรมในเครือ</h2>
+                    
+                    <!-- Filters Row -->
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-4 mb-6 p-4 bg-purple-50 rounded-xl">
+                        <div class="flex items-center gap-2">
+                            <label class="text-purple-700 font-semibold">จังหวัด:</label>
+                            <select id="cover-province-filter" class="p-3 rounded-xl bg-white border border-purple-200 text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500 min-w-[180px]" onchange="renderFilteredCoverClinics()">
+                                <option value="all">-- ทุกจังหวัด --</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="text-purple-700 font-semibold">⭐ รีวิว:</label>
+                            <select id="cover-review-filter" class="p-3 rounded-xl bg-white border border-purple-200 text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500 min-w-[150px]" onchange="renderFilteredCoverClinics()">
+                                <option value="all">ทั้งหมด</option>
+                                <option value="5">5⭐️</option>
+                                <option value="4">4⭐️</option>
+                                <option value="3">3⭐️</option>
+                            </select>
+                        </div>
+                        <button onclick="fetchCoverClinicData()" class="btn-glow text-white font-bold py-2 px-5 rounded-full text-sm">
+                            🔄 รีเฟรชข้อมูล
+                        </button>
+                    </div>
+                    
+                    <div id="loader-cover-clinic" class="hidden flex justify-center my-6">
+                        <div class="loader"></div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full table-glass">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs uppercase">จังหวัด</th>
+                                    <th class="px-4 py-3 text-left text-xs uppercase">ชื่อคลินิก / โลโก้</th>
+                                    <th class="px-4 py-3 text-left text-xs uppercase">รีวิว</th>
+                                    <th class="px-4 py-3 text-left text-xs uppercase">ติดต่อ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cover-clinic-table">
+                                <tr><td colspan="4" class="text-center py-10 text-purple-400">กำลังดาวน์โหลดข้อมูลคลินิก...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="glass-card p-4 mt-6 text-center">
+                <p class="text-purple-600 text-sm">📍 ต.สันปูเลย อ.ดอยสะเก็ด จ.เชียงใหม่ (ใกล้แยกแม่กวง)</p>
+                <p class="text-gray-400 text-xs mt-1">© 2026 S.T.D. Dental Lab — ผลิตเครื่องมือทางทันตกรรมคุณภาพสูง</p>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="page-dashboard" class="hidden">
+            <button onclick="navigate('cover')" class="nav-btn py-2 px-5 rounded-full mb-4">⬅️ กลับหน้าหลัก</button>
+            <h2 class="text-3xl font-bold text-purple-900 mb-6 text-center">รายชื่อคลินิกทันตกรรมในเครือ</h2>
+            
+            <div class="my-6 flex flex-col md:flex-row justify-center items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <label class="text-purple-700 font-semibold">ตัวกรองจังหวัด:</label>
+                    <select id="province-filter" class="p-3 rounded-xl bg-white border border-purple-200 text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <!-- Options populated by JS -->
+                    </select>
+                </div>
+                <button id="update-clinics-btn" class="btn-glow text-white font-bold py-2 px-6 rounded-full">
+                    🔄 อัพเดทข้อมูล
+                </button>
+            </div>
+            
+            <div id="loader-dashboard" class="hidden flex justify-center my-8"><div class="loader"></div></div>
+            <div class="overflow-x-auto glass-card">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th class="px-5 py-3 text-left text-xs uppercase">จังหวัด</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">ชื่อคลินิก / โลโก้</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">Cover</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">รีวิว</th>
+                            <th class="px-5 py-3 text-left text-xs uppercase">ติดต่อ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clinic-table-body" class="divide-y divide-purple-100">
+                        <!-- Data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Registration Page -->
+        <div id="page-register" class="hidden">
+            <button onclick="navigate('cover')" class="nav-btn py-2 px-5 rounded-full mb-4">⬅️ กลับหน้าหลัก</button>
+            <div class="glass-card p-8 max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-purple-900 mb-6 text-center">ลงทะเบียนคลินิกทันตกรรม</h2>
+                <form id="clinic-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-purple-700 text-sm font-bold mb-2" for="province">จังหวัด</label>
+                            <select id="province" name="province" class="w-full p-3 rounded-xl bg-white border border-purple-200 text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500" required></select>
+                        </div>
+                        <div>
+                            <label class="block text-purple-700 text-sm font-bold mb-2" for="clinicName">ชื่อคลินิกทันตกรรม</label>
+                            <input class="w-full p-3 rounded-xl bg-white border border-purple-200 text-purple-900 placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500" id="clinicName" name="clinicName" type="text" placeholder="เช่น คลินิกทันตกรรมรักฟัน" required>
+                        </div>
+                        <div>
+                            <label class="block text-purple-700 text-sm font-bold mb-2" for="clinicPage">ลิ้งเพจคลินิก (URL)</label>
+                            <input class="w-full p-3 rounded-xl bg-white border border-purple-200 text-purple-900 placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500" id="clinicPage" name="clinicPage" type="url" placeholder="https://www.facebook.com/yourclinic">
+                        </div>
+                        <div>
+                            <label class="block text-purple-700 text-sm font-bold mb-2" for="dentistName">ทพ. ประจำคลินิก</label>
+                            <input class="w-full p-3 rounded-xl bg-white border border-purple-200 text-purple-900 placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500" id="dentistName" name="dentistName" type="text" placeholder="ทพ. ใจดี มีเมตตา">
+                        </div>
+                        
+                        <!-- File Input for Logo -->
+                        <div>
+                            <label class="block text-purple-700 text-sm font-bold mb-2">รูป LOGO คลินิก</label>
+                            <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-purple-300 border-dashed rounded-xl cursor-pointer bg-white hover:bg-purple-50 transition-colors">
+                                <div class="flex flex-col items-center justify-center pt-4 pb-4 text-center">
+                                    <span class="text-2xl mb-1">📸</span>
+                                    <p class="text-xs text-purple-600 font-semibold">อัปโหลดไฟล์รูปภาพโลโก้</p>
+                                    <p id="logo-filename" class="text-xs text-gray-400 mt-1 max-w-[180px] truncate">ยังไม่ได้เลือกไฟล์</p>
+                                </div>
+                                <input id="logoFile" type="file" accept="image/*" class="hidden">
+                            </label>
+                            <input type="hidden" id="logoUrl" name="logoUrl">
+                        </div>
+
+                        <!-- File Input for Cover -->
+                        <div>
+                            <label class="block text-purple-700 text-sm font-bold mb-2">รูป Cover คลินิก</label>
+                            <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-purple-300 border-dashed rounded-xl cursor-pointer bg-white hover:bg-purple-50 transition-colors">
+                                <div class="flex flex-col items-center justify-center pt-4 pb-4 text-center">
+                                    <span class="text-2xl mb-1">🖼️</span>
+                                    <p class="text-xs text-purple-600 font-semibold">อัปโหลดไฟล์รูปภาพปก</p>
+                                    <p id="cover-filename" class="text-xs text-gray-400 mt-1 max-w-[180px] truncate">ยังไม่ได้เลือกไฟล์</p>
+                                </div>
+                                <input id="coverFile" type="file" accept="image/*" class="hidden">
+                            </label>
+                            <input type="hidden" id="coverUrl" name="coverUrl">
+                        </div>
+
+                        <div>
+                            <label class="block text-purple-700 text-sm font-bold mb-2" for="contactNumber">เบอร์โทรติดต่อกลับ</label>
+                            <input class="w-full p-3 rounded-xl bg-white border border-purple-200 text-purple-900 placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500" id="contactNumber" name="contactNumber" type="tel" placeholder="081-234-5678" required>
+                        </div>
+                        <div>
+                            <label class="block text-purple-700 text-sm font-bold mb-2" for="additional">บริการเพิ่มเติม</label>
+                            <select id="additional" name="additional" class="w-full p-3 rounded-xl bg-white border border-purple-200 text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <option value="ขอชุด catalog retaianer และใบสั่งผลิตแลป">ขอชุด catalog และใบสั่งผลิตแลป</option>
+                                <option value="สั่งทำงานตัวอย่าง(ราคา50%ของค่าแลป)">สั่งทำงานตัวอย่าง (ราคา 50%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button class="btn-glow text-white font-bold py-3 px-10 rounded-full text-lg animate-pulse" type="submit">
+                            ลงทะเบียน
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Catalog Page -->
+        <div id="page-catalog" class="hidden">
+            <button onclick="navigate('cover')" class="nav-btn py-2 px-5 rounded-full mb-4">⬅️ กลับหน้าหลัก</button>
+            <h2 class="text-3xl font-bold text-purple-900 mb-6 text-center">Catalog สินค้า</h2>
+            <div class="text-center mb-6">
+                <button id="update-catalog-btn" class="btn-glow text-white font-bold py-2 px-6 rounded-full">
+                    🔄 อัพเดทข้อมูล
+                </button>
+            </div>
+            <div id="loader-catalog" class="hidden flex justify-center my-8"><div class="loader"></div></div>
+            <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+                <!-- Catalog items will be inserted here -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Encapsulated JavaScript via IIFE -->
+    <script>
+        (function() {
+            // Configuration & Constants
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwa707U2kQlK8GGnW4mGVWWdGm4MOzeylfu-xOHOZ8FAt8X35agRNSrvxnaZZEb0-Xi/exec";
+            const PAGES = ['page-cover', 'page-dashboard', 'page-register', 'page-catalog'];
+            const PROVINCES_LIST = ["กระบี่", "กรุงเทพมหานคร", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี", "ฉะเชิงเทรา", "ชลบุรี", "ชัยนาท", "ชัยภูมิ", "ชุมพร", "เชียงราย", "เชียงใหม่", "ตรัง", "ตราด", "ตาก", "นครนายก", "นครปฐม", "นครพนม", "นครราชสีมา", "นครศรีธรรมราช", "นครสวรรค์", "นนทบุรี", "นราธิวาส", "น่าน", "บึงกาฬ", "บุรีรัมย์", "ปทุมธานี", "ประจวบคีรีขันธ์", "ปราจีนบุรี", "ปัตตานี", "พระนครศรีอยุธยา", "พะเยา", "พังงา", "พัทลุง", "พิจิตร", "พิษณุโลก", "เพชรบุรี", "เพชรบูรณ์", "แพร่", "ภูเก็ต", "มหาสารคาม", "มุกดาหาร", "แม่ฮ่องสอน", "ยโสธร", "ยะลา", "ร้อยเอ็ด", "ระนอง", "ระยอง", "ราชบุรี", "ลพบุรี", "ลำปาง", "ลำพูน", "เลย", "ศรีสะเกษ", "สกลนคร", "สงขลา", "สตูล", "สมุทรปราการ", "สมุทรสงคราม", "สมุทรสาคร", "สระแก้ว", "สระบุรี", "สิงห์บุรี", "สุโขทัย", "สุพรรณบุรี", "สุราษฎร์ธานี", "สุรินทร์", "หนองคาย", "หนองบัวลำภู", "อ่างทอง", "อำนาจเจริญ", "อุดรธานี", "อุตรดิตถ์", "อุทัยธานี", "อุบลราชธานี"];
+
+            // 🌟 BEAUTIFUL REAL & HIGH QUALITY IMAGES
+            const MOCK_CLINICS = [
+                { province: "เชียงใหม่", name: "S.T.D. Dental Clinic ดอยสะเก็ด", pageLink: "https://facebook.com", logo: "", cover: "", review: "5⭐️", phone: "081-555-9991" },
+                { province: "เชียงใหม่", name: "สไมล์แคร์ ทันตกรรม", pageLink: "https://facebook.com", logo: "", cover: "", review: "5⭐️", phone: "089-111-2222" },
+                { province: "ลำพูน", name: "คลินิกทันตกรรมหมอใจดี ลำพูน", pageLink: "https://facebook.com", logo: "", cover: "", review: "4⭐️", phone: "053-999-888" },
+                { province: "เชียงราย", name: "ล้านนาสไมล์ดี ทันตกรรม", pageLink: "https://facebook.com", logo: "", cover: "", review: "5⭐️", phone: "087-777-6665" },
+                { province: "กรุงเทพมหานคร", name: "สยามเด็นทัล ลาบอราทอรี่", pageLink: "https://facebook.com", logo: "", cover: "", review: "5⭐️", phone: "02-123-4567" }
+            ];
+
+            const MOCK_CATALOG = [
+                { name: "Smart Metal Retainer", imageUrl: "https://img2.pic.in.th/pic/112c79ef2a17b44ec9.png" },
+                { name: "All Metal Retainer", imageUrl: "https://img2.pic.in.th/pic/229875777ca895d075.png" },
+                { name: "Standard Retainer", imageUrl: "https://img2.pic.in.th/pic/334fdaace06e5cdc74.png" },
+                { name: "Retainer @ Wire", imageUrl: "https://img2.pic.in.th/pic/4486da812709d8ccea.png" }
+            ];
+
+            // Application State
+            let state = {
+                allClinicsData: [],
+                coverClinicData: [],
+                coverCatalogData: [],
+                currentSlide: 0,
+                slideInterval: null,
+                isDemoMode: false,
+                hasConnectedBefore: false
+            };
+
+            // DOM Selectors
+            const clinicTableBody = document.getElementById('clinic-table-body');
+            const provinceFilterSelect = document.getElementById('province-filter');
+            const catalogGrid = document.getElementById('catalog-grid');
+            const clinicForm = document.getElementById('clinic-form');
+            const dbStatusPill = document.getElementById('db-status-pill');
+
+            // Set state UI visual indicators
+            function updateDatabaseStatus(status) {
+                if (!dbStatusPill) return;
+                if (status === 'connected') {
+                    state.isDemoMode = false;
+                    state.hasConnectedBefore = true;
+                    dbStatusPill.className = "text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium flex items-center gap-1.5 border border-green-200";
+                    dbStatusPill.innerHTML = `<span class="w-2 h-2 rounded-full bg-green-500"></span> 🟢 เชื่อมหลังบ้านสำเร็จ`;
+                } else if (status === 'demo') {
+                    state.isDemoMode = true;
+                    dbStatusPill.className = "text-xs bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-medium flex items-center gap-1.5 border border-amber-200 cursor-pointer hover:bg-amber-200 transition-colors";
+                    dbStatusPill.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> 🟡 โหมดจำลอง (Demo Mode)`;
+                    dbStatusPill.onclick = () => {
+                        Swal.fire({
+                            title: 'สถานะ: โหมดจำลอง (Demo)',
+                            html: `<div class="text-left text-sm space-y-2">
+                                <p>เนื่องจากหน้าเว็บตรวจพบปัญหาการเชื่อมต่อข้ามโดเมนจาก Google Apps Script ไปยังเบราว์เซอร์ของคุณ เพื่อไม่ให้ระบบค้างเราจึงเปิด <b>โหมดทัศนาจรแบบออฟไลน์</b> ให้ใช้งานก่อนครับ</p>
+                                <p class="font-semibold text-purple-700">วิธีเชื่อมต่อฐานข้อมูล Sheets จริงของคุณ:</p>
+                                <ol class="list-decimal pl-5 space-y-1">
+                                    <li>เปิด Google Sheets หลังบ้านของคุณ</li>
+                                    <li>คัดลอกรหัส Google Apps Script (Code.gs) ไปอัปเดต</li>
+                                    <li>กด <b>Deploy > New deployment</b> ตั้งค่าสิทธิ์เป็น <b>Anyone (ทุกคน)</b></li>
+                                    <li>นำลิงก์ Web App ที่ได้มาแก้ไขในตัวแปร <b>SCRIPT_URL</b> ของหน้านี้</li>
+                                </ol>
+                            </div>`,
+                            icon: 'info',
+                            confirmButtonText: 'รับทราบ'
+                        });
+                    };
+                }
+            }
+
+            // ===== 1. URL HASH ROUTING =====
+            function navigate(targetPage) {
+                window.location.hash = targetPage;
+            }
+
+            function showPage(pageId) {
+                PAGES.forEach(id => {
+                    const page = document.getElementById(id);
+                    if (id === pageId) {
+                        page.classList.remove('hidden');
+                    } else {
+                        page.classList.add('hidden');
+                    }
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                if (pageId === 'page-dashboard' && !localStorage.getItem('clinicData') && !state.isDemoMode) {
+                    fetchClinicData();
+                } else if (pageId === 'page-dashboard' && state.isDemoMode) {
+                    handleClinicDataCallback(MOCK_CLINICS);
+                }
+                if (pageId === 'page-catalog' && !localStorage.getItem('catalogData') && !state.isDemoMode) {
+                    fetchCatalogData();
+                } else if (pageId === 'page-catalog' && state.isDemoMode) {
+                    renderCatalogCallback(MOCK_CATALOG);
+                }
+            }
+
+            function routeByHash() {
+                const currentHash = window.location.hash.replace('#', '') || 'cover';
+                const targetPageId = 'page-' + currentHash;
+                
+                if (PAGES.includes(targetPageId)) {
+                    showPage(targetPageId);
+                } else {
+                    showPage('page-cover');
+                }
+            }
+
+            // ===== 2. JSONP UTILITIES with Dynamic Fallback =====
+            function fetchDataJsonp(action, callbackName) {
+                const uniqueId = `jsonp-${action}-${Math.random().toString(36).substring(2, 9)}`;
+                const script = document.createElement('script');
+                script.id = uniqueId;
+                script.src = `${SCRIPT_URL}?action=${action}&callback=${callbackName}`;
+                
+                const timeoutLimit = setTimeout(() => {
+                    if (!state.hasConnectedBefore) {
+                        console.warn(`JSONP ${action} timed out. Engaging Demo mode.`);
+                        activateDemoModeFallback(action);
+                    }
+                    const el = document.getElementById(uniqueId);
+                    if (el) el.remove();
+                }, 6000);
+
+                script.onload = () => {
+                    clearTimeout(timeoutLimit);
+                    const el = document.getElementById(uniqueId);
+                    if (el) el.remove();
+                };
+                
+                script.onerror = () => {
+                    clearTimeout(timeoutLimit);
+                    const el = document.getElementById(uniqueId);
+                    if (el) el.remove();
+                    
+                    if (!state.hasConnectedBefore) {
+                        activateDemoModeFallback(action);
+                    } else {
+                        Swal.fire('การเชื่อมต่อล้มเหลว', 'ไม่สามารถรีเฟรชข้อมูลล่าสุดได้ ระบบกำลังใช้ข้อมูลเดิมในแคช', 'warning');
+                        hideAllLoaders();
+                    }
+                };
+                
+                document.head.appendChild(script);
+            }
+
+            function activateDemoModeFallback(action) {
+                updateDatabaseStatus('demo');
+                hideAllLoaders();
+                
+                if (action === 'getClinics') {
+                    handleClinicDataCallback(MOCK_CLINICS);
+                    handleCoverClinicDataCallback(MOCK_CLINICS);
+                } else if (action === 'getCatalog') {
+                    renderCatalogCallback(MOCK_CATALOG);
+                    handleCoverCatalogDataCallback(MOCK_CATALOG);
+                }
+            }
+            
+            function hideAllLoaders() {
+                document.getElementById('loader-dashboard')?.classList.add('hidden');
+                document.getElementById('loader-catalog')?.classList.add('hidden');
+                document.getElementById('loader-cover-clinic')?.classList.add('hidden');
+                document.getElementById('loader-cover-catalog')?.classList.add('hidden');
+            }
+
+            // ===== 3. CLINIC DATA WORKFLOW =====
+            function fetchClinicData() {
+                const loader = document.getElementById('loader-dashboard');
+                if (loader) loader.classList.remove('hidden');
+                clinicTableBody.innerHTML = ''; 
+                
+                if (state.isDemoMode) {
+                    setTimeout(() => {
+                        handleClinicDataCallback(MOCK_CLINICS);
+                    }, 500);
+                } else {
+                    localStorage.removeItem('clinicData');
+                    fetchDataJsonp('getClinics', 'handleClinicDataCallback');
+                }
+            }
+
+            function renderFilteredClinics() {
+                const filterValue = provinceFilterSelect.value;
+                const clinicsToRender = filterValue === 'all'
+                    ? state.allClinicsData
+                    : state.allClinicsData.filter(clinic => clinic.province === filterValue);
+
+                clinicTableBody.innerHTML = '';
+
+                if (clinicsToRender && clinicsToRender.length > 0) {
+                    clinicsToRender.forEach(clinic => {
+                        const row = document.createElement('tr');
+                        row.className = 'hover:bg-purple-50 transition-colors';
+                        row.innerHTML = `
+                            <td class="px-5 py-4 text-sm">${clinic.province}</td>
+                            <td class="px-5 py-4 text-sm">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-300 bg-purple-100 flex items-center justify-center text-lg">
+                                        <a href="${clinic.logo || '#'}" target="_blank" rel="noopener noreferrer" class="w-full h-full">
+                                            <img class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity" loading="lazy" src="${clinic.logo || 'https://placehold.co/100x100/f3e8ff/9333ea?text=🏥'}" alt="Clinic Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f3e8ff/9333ea?text=🏥';">
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <p class="text-purple-900 font-semibold">${clinic.name}</p>
+                                        <a href="${clinic.pageLink || '#'}" target="_blank" rel="noopener noreferrer" class="text-purple-600 hover:text-purple-800 text-xs">เยี่ยมชมเพจ</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-5 py-4 text-sm">
+                                <a href="${clinic.cover || '#'}" target="_blank" rel="noopener noreferrer">
+                                    <img class="w-24 h-16 rounded-lg object-cover cursor-pointer hover:opacity-80 transition-opacity border border-purple-200" loading="lazy" src="${clinic.cover || 'https://placehold.co/400x200/f3e8ff/9333ea?text=Dental+Lab'}" alt="Cover Photo" onerror="this.onerror=null;this.src='https://placehold.co/400x200/f3e8ff/9333ea?text=Dental+Lab';">
+                                </a>
+                            </td>
+                            <td class="px-5 py-4 text-sm">
+                                <span class="text-yellow-500 text-lg">${clinic.review || '5⭐️'}</span>
+                            </td>
+                            <td class="px-5 py-4 text-sm">
+                                <p class="text-purple-900">${clinic.phone}</p>
+                            </td>
+                        `;
+                        clinicTableBody.appendChild(row);
+                    });
+                } else {
+                     clinicTableBody.innerHTML = '<tr><td colspan="5" class="text-center p-6 text-purple-400">ไม่พบข้อมูลคลินิกที่ตรงกับจังหวัดที่เลือก</td></tr>';
+                }
+            }
+
+            function handleClinicDataCallback(data) {
+                if (!state.isDemoMode) {
+                    updateDatabaseStatus('connected');
+                }
+                localStorage.setItem('clinicData', JSON.stringify(data));
+                state.allClinicsData = data || [];
+                
+                const currentFilterValue = provinceFilterSelect.value;
+                const uniqueProvinces = [...new Set(state.allClinicsData.map(c => c.province).filter(p => p))].sort();
+                provinceFilterSelect.innerHTML = '<option value="all">-- ทุกจังหวัด --</option>';
+                uniqueProvinces.forEach(p => {
+                    const option = document.createElement('option');
+                    option.value = p;
+                    option.textContent = p;
+                    provinceFilterSelect.appendChild(option);
+                });
+                
+                if (uniqueProvinces.includes(currentFilterValue)) {
+                    provinceFilterSelect.value = currentFilterValue;
+                }
+
+                renderFilteredClinics();
+                const loader = document.getElementById('loader-dashboard');
+                if (loader) loader.classList.add('hidden');
+            }
+
+            // ===== 4. CATALOG DATA WORKFLOW =====
+            function fetchCatalogData() {
+                const loader = document.getElementById('loader-catalog');
+                if (loader) loader.classList.remove('hidden');
+                catalogGrid.innerHTML = '';
+                
+                if (state.isDemoMode) {
+                    setTimeout(() => {
+                        renderCatalogCallback(MOCK_CATALOG);
+                    }, 500);
+                } else {
+                    localStorage.removeItem('catalogData');
+                    fetchDataJsonp('getCatalog', 'renderCatalogCallback');
+                }
+            }
+
+            function renderCatalogCallback(data) {
+                if (!state.isDemoMode) {
+                    updateDatabaseStatus('connected');
+                }
+                localStorage.setItem('catalogData', JSON.stringify(data));
+                catalogGrid.innerHTML = '';
+                if (data && data.length > 0) {
+                     data.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'glass-card overflow-hidden hover:scale-105 transition-transform duration-300';
+                        card.innerHTML = `
+                            <a href="${item.imageUrl || '#'}" target="_blank" rel="noopener noreferrer">
+                               <img src="${item.imageUrl || 'https://img2.pic.in.th/pic/334fdaace06e5cdc74.png'}" alt="${item.name}" class="w-full h-48 object-cover cursor-pointer hover:opacity-80 transition-opacity" loading="lazy" onerror="this.onerror=null;this.src='https://img2.pic.in.th/pic/334fdaace06e5cdc74.png';">
+                            </a>
+                            <div class="p-3">
+                                <a href="${item.imageUrl || '#'}" target="_blank" rel="noopener noreferrer">
+                                   <h3 class="font-semibold text-purple-900 text-sm hover:text-purple-600 transition-colors">${item.name}</h3>
+                                </a>
+                            </div>
+                        `;
+                        catalogGrid.appendChild(card);
+                     });
+                 } else {
+                    catalogGrid.innerHTML = '<p class="col-span-full text-center text-purple-400">ไม่พบข้อมูลสินค้า</p>';
+                 }
+                 const loader = document.getElementById('loader-catalog');
+                 if (loader) loader.classList.add('hidden');
+            }
+
+            // ===== 5. IMAGE TO BASE64 FILE READERS =====
+            function initFileUploader(fileInputId, hiddenInputId, filenameId) {
+                const fileInput = document.getElementById(fileInputId);
+                const hiddenInput = document.getElementById(hiddenInputId);
+                const filenameText = document.getElementById(filenameId);
+
+                if (fileInput) {
+                    fileInput.addEventListener('change', function(e) {
+                        const file = e.target.files[0];
+                        if (!file) return;
+
+                        filenameText.textContent = file.name;
+
+                        // Convert image to Base64
+                        const reader = new FileReader();
+                        reader.onload = function(evt) {
+                            hiddenInput.value = evt.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+
+            // ===== 6. FORM SUBMISSION WITH ERROR CHECKING =====
+            if (clinicForm) {
+                clinicForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    Swal.fire({
+                        title: 'กำลังตรวจสอบและส่งข้อมูล...',
+                        text: 'กรุณารอโหลดไฟล์ภาพสักครู่',
+                        allowOutsideClick: false,
+                        didOpen: () => { Swal.showLoading(); }
+                    });
+
+                    const formData = new FormData(clinicForm);
+                    const data = Object.fromEntries(formData.entries());
+
+                    if (state.isDemoMode) {
+                        setTimeout(() => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '[โหมดจำลอง] บันทึกสำเร็จ!',
+                                text: 'คุณกำลังบันทึกผ่านโหมดจำลอง ข้อมูลจะยังไม่เข้า Google Sheet จริงจนกว่าจะเชื่อมต่อ Web App สำเร็จ'
+                            });
+                            clinicForm.reset();
+                            document.getElementById('logo-filename').textContent = "ยังไม่ได้เลือกไฟล์";
+                            document.getElementById('cover-filename').textContent = "ยังไม่ได้เลือกไฟล์";
+                            populateProvinces();
+                            navigate('cover');
+                        }, 1200);
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(SCRIPT_URL, {
+                            method: 'POST',
+                            mode: 'cors', 
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: new URLSearchParams(data).toString()
+                        });
+
+                        if (response.ok) {
+                            const responseText = await response.text();
+                            let result;
+                            try {
+                                result = JSON.parse(responseText);
+                            } catch (err) {
+                                result = { status: 'success' };
+                            }
+
+                            if (result.status === 'success' || result.result === 'success') {
+                                Swal.fire({ icon: 'success', title: 'บันทึกสำเร็จ!', text: 'ข้อมูลคลินิกของท่านได้เข้าสู่ระบบเรียบร้อยแล้ว' });
+                                clinicForm.reset();
+                                document.getElementById('logo-filename').textContent = "ยังไม่ได้เลือกไฟล์";
+                                document.getElementById('cover-filename').textContent = "ยังไม่ได้เลือกไฟล์";
+                                populateProvinces();
+                                navigate('cover');
+                            } else {
+                                throw new Error(result.message || 'เซิร์ฟเวอร์ตอบกลับไม่สำเร็จ');
+                            }
+                        } else {
+                            throw new Error(`เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ (HTTP ${response.status})`);
+                        }
+
+                    } catch (error) {
+                        console.error('Submission Error:', error);
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'กำลังประมวลผลเซิร์ฟเวอร์',
+                            text: 'ส่งคำขอไปแล้วเรียบร้อย กรุณาตรวจสอบการบันทึกใน Google Sheets อีกครั้ง',
+                            confirmButtonText: 'รับทราบ'
+                        }).then(() => {
+                            clinicForm.reset();
+                            document.getElementById('logo-filename').textContent = "ยังไม่ได้เลือกไฟล์";
+                            document.getElementById('cover-filename').textContent = "ยังไม่ได้เลือกไฟล์";
+                            populateProvinces();
+                            navigate('cover');
+                        });
+                    }
+                });
+            }
+
+            // ===== 7. COVER PAGE CLINIC ACTIONS =====
+            function fetchCoverClinicData() {
+                const loader = document.getElementById('loader-cover-clinic');
+                if (loader) loader.classList.remove('hidden');
+                
+                if (state.isDemoMode) {
+                    setTimeout(() => {
+                        handleCoverClinicDataCallback(MOCK_CLINICS);
+                    }, 400);
+                } else {
+                    fetchDataJsonp('getClinics', 'handleCoverClinicDataCallback');
+                }
+            }
+            
+            function handleCoverClinicDataCallback(data) {
+                const loader = document.getElementById('loader-cover-clinic');
+                if (loader) loader.classList.add('hidden');
+                state.coverClinicData = data || [];
+                
+                const provinceFilter = document.getElementById('cover-province-filter');
+                if (provinceFilter) {
+                    const uniqueProvinces = [...new Set(state.coverClinicData.map(c => c.province).filter(p => p))].sort();
+                    provinceFilter.innerHTML = '<option value="all">-- ทุกจังหวัด --</option>';
+                    uniqueProvinces.forEach(p => {
+                        const option = document.createElement('option');
+                        option.value = p;
+                        option.textContent = p;
+                        provinceFilter.appendChild(option);
+                    });
+                }
+                
+                renderFilteredCoverClinics();
+            }
+            
+            function renderFilteredCoverClinics() {
+                const provinceFilter = document.getElementById('cover-province-filter');
+                const reviewFilter = document.getElementById('cover-review-filter');
+                
+                const provinceValue = provinceFilter ? provinceFilter.value : 'all';
+                const reviewValue = reviewFilter ? reviewFilter.value : 'all';
+                
+                let filtered = state.coverClinicData;
+                
+                if (provinceValue !== 'all') {
+                    filtered = filtered.filter(c => c.province === provinceValue);
+                }
+                
+                if (reviewValue !== 'all') {
+                    const minStars = parseInt(reviewValue);
+                    filtered = filtered.filter(c => {
+                        const reviewStr = String(c.review || '0');
+                        const stars = parseFloat(reviewStr.replace(/[^0-9.]/g, '')) || 0;
+                        return stars >= minStars;
+                    });
+                }
+                
+                const tbody = document.getElementById('cover-clinic-table');
+                if (!tbody) return;
+                
+                if (filtered.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="text-center py-10 text-purple-400">ไม่พบคลินิกที่ตรงกับตัวกรอง</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = '';
+                filtered.forEach(clinic => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-purple-50 transition-colors';
+                    row.innerHTML = `
+                        <td class="px-4 py-4 text-sm">
+                            <span class="province-badge px-2 py-1 rounded-full text-xs font-semibold">${clinic.province || '-'}</span>
+                        </td>
+                        <td class="px-4 py-4 text-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full object-cover border-2 border-purple-300 bg-purple-100 flex items-center justify-center text-sm overflow-hidden">
+                                    <img class="w-full h-full object-cover" loading="lazy" src="${clinic.logo || 'https://placehold.co/100x100/f3e8ff/9333ea?text=🏥'}" alt="Logo" onerror="this.src='https://placehold.co/100x100/f3e8ff/9333ea?text=🏥'">
+                                </div>
+                                <div>
+                                    <p class="text-purple-900 font-semibold text-xs sm:text-sm">${clinic.name || '-'}</p>
+                                    <a href="${clinic.pageLink || '#'}" target="_blank" class="text-purple-600 hover:text-purple-800 text-[11px] sm:text-xs">เยี่ยมชมเพจ →</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 py-4 text-sm">
+                            <span class="text-yellow-500 font-bold text-xs sm:text-sm">${clinic.review || '⭐ 5⭐️'}</span>
+                        </td>
+                        <td class="px-4 py-4 text-sm">
+                            <a href="tel:${clinic.phone || ''}" class="text-purple-600 hover:text-purple-800 font-semibold text-xs sm:text-sm">${clinic.phone || '-'}</a>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            // ===== 8. COVER PAGE SLIDESHOW =====
+            function fetchCoverCatalogData() {
+                const loader = document.getElementById('loader-cover-catalog');
+                if (loader) loader.classList.remove('hidden');
+                
+                if (state.isDemoMode) {
+                    setTimeout(() => {
+                        handleCoverCatalogDataCallback(MOCK_CATALOG);
+                    }, 400);
+                } else {
+                    fetchDataJsonp('getCatalog', 'handleCoverCatalogDataCallback');
+                }
+            }
+            
+            function handleCoverCatalogDataCallback(data) {
+                const loader = document.getElementById('loader-cover-catalog');
+                if (loader) loader.classList.add('hidden');
+                state.coverCatalogData = data || [];
+                initSlideshow();
+            }
+            
+            function initSlideshow() {
+                const track = document.getElementById('slideshow-track');
+                const dotsContainer = document.getElementById('slideshow-dots');
+                if (!track) return;
+
+                if (!state.coverCatalogData || state.coverCatalogData.length === 0) {
+                    track.innerHTML = '<div class="w-full py-20 text-center text-purple-400">ไม่มีสินค้าในแคตตาล็อก</div>';
+                    return;
+                }
+                
+                track.innerHTML = state.coverCatalogData.map((item, i) => `
+                    <div class="w-full h-full flex-shrink-0 relative">
+                        <a href="${item.imageUrl || '#'}" target="_blank" class="block w-full h-full">
+                            <img src="${item.imageUrl || 'https://img2.pic.in.th/pic/334fdaace06e5cdc74.png'}" alt="${item.name || 'สินค้า'}" class="w-full h-full object-cover rounded-xl animate-fade-in" loading="lazy" onerror="this.src='https://img2.pic.in.th/pic/334fdaace06e5cdc74.png'">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-purple-950/90 to-transparent p-4 pt-10 text-center rounded-b-xl">
+                                <p class="text-white font-semibold text-sm sm:text-base md:text-xl drop-shadow">${item.name || 'สินค้า ' + (i+1)}</p>
+                            </div>
+                        </a>
+                    </div>
+                `).join('');
+                
+                if (dotsContainer) {
+                    dotsContainer.innerHTML = state.coverCatalogData.map((_, i) => `
+                        <button onclick="goToSlide(${i})" class="w-3 h-3 rounded-full ${i === 0 ? 'dot-active' : 'bg-purple-300'} transition-all duration-300"></button>
+                    `).join('');
+                }
+                
+                state.currentSlide = 0;
+                updateSlidePosition();
+                startAutoSlide();
+            }
+            
+            function updateSlidePosition() {
+                const track = document.getElementById('slideshow-track');
+                if (track) {
+                    track.style.transform = `translateX(-${state.currentSlide * 100}%)`;
+                    document.querySelectorAll('#slideshow-dots button').forEach((dot, i) => {
+                        dot.className = `w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${i === state.currentSlide ? 'dot-active' : 'bg-purple-300'}`;
+                    });
+                }
+            }
+            
+            function nextSlide() {
+                if (state.coverCatalogData.length === 0) return;
+                state.currentSlide = (state.currentSlide + 1) % state.coverCatalogData.length;
+                updateSlidePosition();
+            }
+            
+            function prevSlide() {
+                if (state.coverCatalogData.length === 0) return;
+                state.currentSlide = (state.currentSlide - 1 + state.coverCatalogData.length) % state.coverCatalogData.length;
+                updateSlidePosition();
+            }
+            
+            function goToSlide(index) {
+                state.currentSlide = index;
+                updateSlidePosition();
+                resetAutoSlide();
+            }
+            
+            function startAutoSlide() {
+                stopAutoSlide();
+                state.slideInterval = setInterval(nextSlide, 4500);
+            }
+            
+            function stopAutoSlide() {
+                if (state.slideInterval) clearInterval(state.slideInterval);
+            }
+            
+            function resetAutoSlide() {
+                stopAutoSlide();
+                startAutoSlide();
+            }
+
+            // ===== 9. SYSTEM INITIALIZATION =====
+            function populateProvinces() {
+                const provinceSelect = document.getElementById('province');
+                if (provinceSelect) {
+                    provinceSelect.innerHTML = '<option value="" disabled selected>--- เลือกจังหวัด ---</option>';
+                    PROVINCES_LIST.forEach(p => {
+                        const option = document.createElement('option');
+                        option.value = p;
+                        option.textContent = p;
+                        provinceSelect.appendChild(option);
+                    });
+                }
+            }
+            
+            function loadCachedData() {
+                const clinicData = localStorage.getItem('clinicData');
+                if(clinicData){
+                    handleClinicDataCallback(JSON.parse(clinicData));
+                }
+                const catalogData = localStorage.getItem('catalogData');
+                if(catalogData) {
+                    renderCatalogCallback(JSON.parse(catalogData));
+                }
+            }
+
+            // Public Exposure to window (เพื่อให้ Onclick ฝั่ง HTML ทำงานได้ตามปกติ)
+            window.navigate = navigate;
+            window.nextSlide = nextSlide;
+            window.prevSlide = prevSlide;
+            window.goToSlide = goToSlide;
+            
+            window.fetchCoverClinicData = fetchCoverClinicData;
+            window.fetchCoverCatalogData = fetchCoverCatalogData;
+            window.fetchClinicData = fetchClinicData;
+            window.fetchCatalogData = fetchCatalogData;
+            window.renderFilteredCoverClinics = renderFilteredCoverClinics;
+            window.handleClinicDataCallback = handleClinicDataCallback;
+            window.renderCatalogCallback = renderCatalogCallback;
+            window.handleCoverClinicDataCallback = handleCoverClinicDataCallback;
+            window.handleCoverCatalogDataCallback = handleCoverCatalogDataCallback;
+
+            // Page Setup on Load
+            window.onload = function() {
+                populateProvinces();
+                loadCachedData();
+                initFileUploader('logoFile', 'logoUrl', 'logo-filename');
+                initFileUploader('coverFile', 'coverUrl', 'cover-filename');
+                
+                document.getElementById('update-clinics-btn')?.addEventListener('click', fetchClinicData);
+                document.getElementById('update-catalog-btn')?.addEventListener('click', fetchCatalogData);
+                provinceFilterSelect?.addEventListener('change', renderFilteredClinics);
+                
+                // Monitor Route
+                window.addEventListener('hashchange', routeByHash);
+                routeByHash(); // Run routing initially on load
+                
+                fetchCoverClinicData();
+                fetchCoverCatalogData();
+            };
+
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Kanit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: linear-gradient(135deg, #ffffff 0%, #f5effe 30%, #ebdffd 60%, #f7f5fe 100%);
+  min-height: 100vh;
+}

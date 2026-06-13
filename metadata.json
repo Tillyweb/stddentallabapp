@@ -1,0 +1,6 @@
+{
+  "name": "S.T.D. DENTAL LAB Partner Clinics",
+  "description": "เเพลตฟอร์มพาร์ทเนอร์คลินิกทันตกรรมและการจัดการแคตตาล็อกสินค้า หจก. เอส.ที.ดี. เด็นตอล แลป",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
