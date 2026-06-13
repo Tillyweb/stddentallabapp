@@ -37,7 +37,7 @@ export default function Slideshow({ items, onRefresh, isLoading }: SlideshowProp
       <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-3">
         <h2 className="text-xl sm:text-2xl font-bold text-purple-950 flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-purple-600 animate-pulse" />
-          📦 แคตตาล็อกและโมเดลสินค้า (Catalog & Models)
+          📦 งานทันตกรรมประดิษฐ์และคอลเลกชันชิ้นเอก (Masterpiece Collection & Models)
         </h2>
         <button
           onClick={onRefresh}
@@ -45,14 +45,14 @@ export default function Slideshow({ items, onRefresh, isLoading }: SlideshowProp
           className="bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold py-2 px-4.5 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-purple-500/15 cursor-pointer hover:scale-103 transition-all duration-200"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
-          {isLoading ? 'กำลังโหลด...' : '🔄 รีเฟรชสินค้าแบล็กบอกซ์'}
+          {isLoading ? 'กำลังโหลด...' : '🔄 รีเฟรชผลิตภัณฑ์คัดสรร'}
         </button>
       </div>
 
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-20 bg-purple-50/20 rounded-2xl border border-purple-50">
           <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
-          <p className="text-purple-655 text-xs font-semibold mt-4">กำลังโหลดแคตตาล็อกโมเดลทันตกรรม...</p>
+          <p className="text-purple-655 text-xs font-semibold mt-4">กำลังคัดสรรแคตตาล็อกโมเดลทันตกรรมชั้นสูง...</p>
         </div>
       ) : items.length === 0 ? (
         <div className="text-center py-16 bg-purple-50/20 rounded-2xl border border-dashed border-purple-200 text-purple-400 font-medium">
@@ -81,13 +81,13 @@ export default function Slideshow({ items, onRefresh, isLoading }: SlideshowProp
                     <div className="absolute inset-0 bg-gradient-to-t from-purple-950/90 via-purple-950/30 to-transparent flex items-end p-5 md:p-8">
                       <div className="text-left w-full">
                         <span className="bg-purple-600 text-white text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider shadow">
-                          Restorations & Retainers
+                          Bespoke Restorations & Fine Craftsmanship
                         </span>
                         <h3 className="text-white font-bold text-base sm:text-xl md:text-2xl mt-2 drop-shadow-md tracking-tight">
                           {item.name}
                         </h3>
                         <p className="text-purple-200 text-xs sm:text-sm mt-1 drop-shadow font-light">
-                          คุณภาพพรีเมียม ส่งมอบงานรวดเร็วทันใจ โดย S.T.D. Dental Lab
+                          Exquisite quality and heritage craftsmanship, tailored to elevate your clinic's prestige.
                         </p>
                       </div>
                     </div>

@@ -449,7 +449,7 @@ export default function Dashboard({
           ย้อนกลับหน้าแรก
         </button>
         <h2 className="text-xl sm:text-2xl font-extrabold text-purple-950 text-center flex-1">
-          📊 ระบบจัดการแดชบอร์ดพาร์ทเนอร์ (Partner Dashboard)
+          📊 แดชบอร์ดการจัดการพันธมิตรระดับเกียรติยศ (Prestigious Partner Curation & C-Suite)
         </h2>
         <div className="flex gap-2.5 shrink-0 w-full lg:w-auto justify-end">
           <button
@@ -461,7 +461,7 @@ export default function Dashboard({
             }`}
           >
             <Settings className="w-4.5 h-4.5 animate-spin-slow" />
-            {showSetup ? 'ปิดตั้งค่า Sheets' : '⚙️ ตั้งค่า Google Sheets'}
+            {showSetup ? 'ปิดหน้าเชื่อมต่อคลาวด์' : '⚙️ Curation Cloud Link'}
           </button>
           
           <button
@@ -470,7 +470,7 @@ export default function Dashboard({
             className="bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold py-2.5 px-5 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-purple-500/15 cursor-pointer hover:scale-103 transition-all duration-200"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
-            {isLoading ? 'กำลังซิงก์...' : '🔄 ซิงก์ข้อมูล Sheets'}
+            {isLoading ? 'กำลังซิงก์...' : '🔄 Curated Refresh'}
           </button>
         </div>
       </div>
@@ -487,7 +487,7 @@ export default function Dashboard({
             </span>
             <div>
               <h3 className="text-lg font-bold text-white tracking-tight">
-                🛠️ คู่มือติดตั้งฐานข้อมูล Google Sheets เป็นระบบ Real-time
+                🛠️ คู่มือติดตั้งสถาปัตยกรรมคลาวด์ฐานข้อมูลแบบ Real-time
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
                 เชื่อมต่อฐานข้อมูลของคลินิกโดยใช้ Google Sheet ID ของท่าน: <code className="text-amber-300 font-mono select-all">1M2h9dGWMMUNwFr1sy2WtvMBxgCsRvXbVf-BD8GD_lNA</code>
@@ -500,7 +500,7 @@ export default function Dashboard({
             <div className="space-y-5 text-slate-300">
               <h4 className="font-extrabold text-sm text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
                 <CloudLightning className="w-4 h-4" /> 
-                3 ขั้นตอนเชื่อมระบบใน 2 นาที
+                3 ขั้นตอนยกระดับสถาปัตยกรรมคลาวด์ใน 2 นาที
               </h4>
               
               <ul className="space-y-4 text-xs sm:text-sm">
@@ -555,7 +555,7 @@ export default function Dashboard({
               {/* URL Dynamic input configuration form */}
               <form onSubmit={handleSaveUrl} className="pt-4 border-t border-white/10 mt-6">
                 <label className="block text-amber-400 font-bold text-xs sm:text-sm mb-2">
-                  🔌 ช่องระบุลิงก์ Web App URL ของท่านเพื่อป้อนระบบ:
+                  🔌 ช่องระบุลิงก์ Web App API เพื่อเชื่อมต่อโครงข่ายคลาวด์:
                 </label>
                 <div className="flex flex-col sm:flex-row gap-2.5">
                   <input
@@ -570,7 +570,7 @@ export default function Dashboard({
                       type="submit"
                       className="bg-purple-650 hover:bg-purple-700 text-white font-bold py-2.5 px-5 rounded-xl text-xs sm:text-sm shrink-0 shadow-lg cursor-pointer transition-transform duration-250 active:scale-95"
                     >
-                      🔗 บันทึกเชื่อมโยง
+                      🔗 Secure Link
                     </button>
                     {scriptUrl !== 'https://script.google.com/macros/s/AKfycbwa707U2kQlK8GGnW4mGVWWdGm4MOzeylfu-xOHOZ8FAt8X35agRNSrvxnaZZEb0-Xi/exec' && (
                       <button

@@ -31,7 +31,7 @@ export default function CatalogGrid({ items, onRefresh, isLoading, onBack }: Cat
           ย้อนกลับหน้าแรก
         </button>
         <h2 className="text-xl sm:text-2xl font-extrabold text-purple-950 text-center flex-1">
-          📦 ผลิตภัณฑ์และงานแลปทั้งหมด (Laboratory Products Catalog)
+          📦 ผลิตภัณฑ์และงานทันตกรรมประดิษฐ์คัดสรร (Bespoke Dental Craftsmanship Catalog)
         </h2>
         <button
           onClick={onRefresh}
@@ -39,7 +39,7 @@ export default function CatalogGrid({ items, onRefresh, isLoading, onBack }: Cat
           className="ml-auto sm:ml-0 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold py-2.5 px-5 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-purple-500/15 cursor-pointer hover:scale-103 transition-all duration-200"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
-          {isLoading ? 'กำลังรีเฟรช...' : '🔄 รีเฟรชสินค้า'}
+          {isLoading ? 'กำลังรีเฟรช...' : '🔄 Curated Refresh'}
         </button>
       </div>
 
@@ -65,7 +65,7 @@ export default function CatalogGrid({ items, onRefresh, isLoading, onBack }: Cat
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-24">
           <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
-          <p className="text-purple-650 text-xs font-bold mt-4 animate-pulse">กำลังดาวน์โหลดข้อมูลสินค้าจากแบล็กบอกซ์แลป...</p>
+          <p className="text-purple-650 text-xs font-bold mt-4 animate-pulse">กำลังคัดสรรผลิตภัณฑ์ชิ้นเอกระดับพรีเมียม (Curating Masterpiece Catalog)...</p>
         </div>
       ) : filteredItems.length === 0 ? (
         <div className="text-center py-16 bg-purple-50/10 rounded-2xl border border-dashed border-purple-100 text-purple-400">
@@ -98,7 +98,7 @@ export default function CatalogGrid({ items, onRefresh, isLoading, onBack }: Cat
               <div className="p-4 flex flex-col justify-between min-h-[110px]">
                 <div>
                   <span className="text-[10px] bg-purple-50 border border-purple-100/80 text-purple-700 font-bold px-2.5 py-0.5 rounded-full tracking-wider">
-                    DENTAL APPARATUS
+                    SIGNATURE DENTAL ARTISTRY
                   </span>
                   <h3 className="font-bold text-sm text-purple-950 mt-1.5 line-clamp-2 leading-tight group-hover:text-purple-700 transition-colors">
                     {item.name}
@@ -107,7 +107,7 @@ export default function CatalogGrid({ items, onRefresh, isLoading, onBack }: Cat
                 
                 <div className="pt-3 border-t border-purple-50/80 mt-3 flex justify-between items-center">
                   <span className="text-[11px] text-purple-500/80 font-semibold flex items-center gap-1">
-                    🟢 งานฝีมือปราณีต
+                    🟢 Refined Craftsmanship
                   </span>
                   <a
                     href={item.imageUrl}
@@ -115,7 +115,7 @@ export default function CatalogGrid({ items, onRefresh, isLoading, onBack }: Cat
                     rel="noopener noreferrer"
                     className="text-purple-600 hover:text-purple-900 font-extrabold text-xs inline-flex items-center gap-1 cursor-pointer"
                   >
-                    ดูภาพใหญ่
+                    Exquisite view
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>

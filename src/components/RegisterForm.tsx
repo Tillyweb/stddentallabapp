@@ -155,10 +155,10 @@ export default function RegisterForm({ onBack, onSubmit }: RegisterFormProps) {
 
       <div className="text-center mb-8">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-purple-950 flex items-center justify-center gap-2">
-          ✍️ ลงทะเบียนพาร์ทเนอร์คลินิก (Partner Registration)
+          ✍️ ร่วมเป็นพันธมิตรรังสรรค์งานประณีตเฉพาะบุคคล (Bespoke Partner Registration)
         </h2>
         <p className="text-purple-650 text-sm mt-1.5 font-light">
-          กรอกแบบฟอร์มเพื่อเข้าสู่เครือข่ายพาร์ทเนอร์ทันตกรรมชั้นนำกับ เอส.ที.ดี. เด็นตอล แลป
+          ยกระดับคลินิกทันตกรรมของท่านสู่ความโดดเด่นด้วยทันตกรรมประดิษฐ์ระดับ World-class จาก เอส.ที.ดี. เด็นตอล แลป
         </p>
       </div>
 
@@ -259,10 +259,10 @@ export default function RegisterForm({ onBack, onSubmit }: RegisterFormProps) {
               className="w-full p-3.5 rounded-xl bg-white border border-purple-200 text-purple-950 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/30 transition-all duration-200 cursor-pointer"
             >
               <option value="ขอชุด catalog retaianer และใบสั่งผลิตแลป">
-                ขอชุด Catalog พิมพ์สี และใบสั่งผลิตแลป
+                ขอชุด Signature Catalog และคู่มือชิ้นงาน (Bespoke Product Guide)
               </option>
               <option value="สั่งทำงานตัวอย่าง(ราคา50%ของค่าแลป)">
-                สั่งผลิตงานตัวอย่างโมเดลแรกเข้า (ลดราคา 50%)
+                รังสรรค์ผลงานตัวอย่างชิ้นเอก (รับบริการพิเศษเพียง 50% ของอัตรามาตรฐาน)
               </option>
             </select>
           </div>
@@ -372,7 +372,7 @@ export default function RegisterForm({ onBack, onSubmit }: RegisterFormProps) {
             ) : (
               <>
                 <CheckCircle className="w-5 h-5" />
-                ลงทะเบียนคลินิกเดี๋ยวนี้
+                Elevate Clinic Status
               </>
             )}
           </button>
